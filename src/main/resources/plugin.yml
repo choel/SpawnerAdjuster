@@ -1,0 +1,100 @@
+name: SpawnerAdjuster
+main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
+version: 1.0.1
+author: Choelian
+softdepend: [Permissions]
+permissions:
+    SpawnerAdjuster.*:
+        description: Gives access to all SpawnerAdjuster functions
+        children:
+            SpawnerAdjuster.SetMobs.*: true
+            SpawnerAdjuster.BreakSpawners: true
+        default: true
+    SpawnerAdjuster.SetMobs.*:
+        description: Allows players to set all mob types on a monster spawner
+        children:
+            SpawnerAdjuster.SetMobs.Neutral.*: true
+            SpawnerAdjuster.SetMobs.Nether.*: true
+            SpawnerAdjuster.SetMobs.Hostile.*: true
+            SpawnerAdjuster.SetMobs.Unused.*: true
+        default: true
+    SpawnerAdjuster.SetMobs.Neutral.*:
+        description: Allows players to set all NEUTRAL mob types on a monster spawner
+        children:
+            SpawnerAdjuster.SetMobs.Neutral.Pig: true
+            SpawnerAdjuster.SetMobs.Neutral.Wolf: true
+            SpawnerAdjuster.SetMobs.Neutral.Enderman: true
+            SpawnerAdjuster.SetMobs.Neutral.Sheep: true
+            SpawnerAdjuster.SetMobs.Neutral.Cow: true
+            SpawnerAdjuster.SetMobs.Neutral.Squid: true
+        default: true
+    SpawnerAdjuster.SetMobs.Hostile.*:
+        description: Allows players to set all HOSTILE mob types on a monster spawner
+        children:
+            SpawnerAdjuster.SetMobs.Hostile.Creeper: true
+            SpawnerAdjuster.SetMobs.Hostile.Spider: true
+            SpawnerAdjuster.SetMobs.Hostile.CaveSpider: true
+            SpawnerAdjuster.SetMobs.Hostile.Skeleton: true
+            SpawnerAdjuster.SetMobs.Hostile.Silverfish: true
+            SpawnerAdjuster.SetMobs.Hostile.Slime: true
+        default: true
+    SpawnerAdjuster.SetMobs.Nether.*:
+        description: Allows players to set all Nether mob types on a monster spawner
+        children:
+            SpawnerAdjuster.SetMobs.Nether.Ghast: true
+            SpawnerAdjuster.SetMobs.Nether.PigZombie: true
+        default: true
+    SpawnerAdjuster.SetMobs.Unused.*:
+        description: Allows players to set all Unsued mob types on a monster spawner
+        children:
+            SpawnerAdjuster.SetMobs.Unused.Giant: true
+        default: true
+    SpawnerAdjuster.BreakSpawners:
+        description: Allows players to break a monster spawner
+        default: true
+    SpawnerAdjuster.SetMobs.Unused.Giant:
+        description: Allows players to set a Monster Spawner to spawn Giants
+        default: true
+    SpawnerAdjuster.SetMobs.Nether.Ghast:
+        description: Allows a player to set a Monster Spawner to spawn Ghasts
+        default: true
+    SpawnerAdjuster.SetMobs.Nether.PigZombie:
+        description: Allows a player to set a Monster Spawner to spawn Pig Zombie Man
+        default: true
+    SpawnerAdjuster.SetMobs.Hostile.Creeper:
+        description: Allows a player to set a Monster Spawner to spawn Creepers
+        default: true
+    SpawnerAdjuster.SetMobs.Hostile.Spider:
+        description: Allows a player to set a Monster Spawner to spawn Spiders
+        default: true
+    SpawnerAdjuster.SetMobs.Hostile.CaveSpider:
+        description: oh my god I hate typing all this permissions stuff
+        default: true
+    SpawnerAdjuster.SetMobs.Hostile.Skeleton:
+        description: Allows a player to set a Monster Spawner to spawn Skelebones
+        default: true
+    SpawnerAdjuster.SetMobs.Hostile.Silverfish:
+        description: Allows a player to set a Monster Spawner to spawn Silverfish
+        default: true
+    SpawnerAdjuster.SetMobs.Hostile.Slime:
+        description: Allows a player to set a Monster Spawner to spawn Slimes
+        default: true
+    SpawnerAdjuster.SetMobs.Neutral.Cow:
+        description: Allows a player to set a Monster Spawner to spawn Cows
+        default: true
+    SpawnerAdjuster.SetMobs.Neutral.Sheep:
+        description: Allows a player to set a Monster Spawner to spawn Sheep
+        default: true
+    SpawnerAdjuster.SetMobs.Neutral.Wolf:
+        description: Allows a player to set a Monster Spawner to spawn Wolf
+        default: true
+    SpawnerAdjuster.SetMobs.Neutral.Enderman:
+        description: Allows a player to set a Monster Spawner to spawn Endermen
+        default: true
+    SpawnerAdjuster.SetMobs.Neutral.Pig:
+        description: allows a Monster Spawner to set a player to spawn Pigs
+        default: true
+    SpawnerAdjuster.SetMobs.Neutral.Squid:
+        description: Allows a player to set a Monster Spawner to spawn Squid which is a bad idea
+        default: true
+    
