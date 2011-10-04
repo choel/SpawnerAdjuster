@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerListener;
 
@@ -15,14 +16,15 @@ public class AdjusterPlayerListener extends PlayerListener {
 	
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(event.getClickedBlock() == null) return;
-		if(event.getClickedBlock().getType() == Material.MOB_SPAWNER) {
+		if(event.getClickedBlock().getType() == Material.MOB_SPAWNER && SpawnerAdjuster.usePlayerListener) {
 			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.ChangeSpawnType")) {
-				CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
-				String name = spawner.getCreatureType().getName();
-				setSpawnType(spawner, event.getPlayer());
-				String newName = spawner.getCreatureType().getName();
-				event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + " is now: " + ChatColor.GREEN + newName);
-				
+				if(event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR) {
+					CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
+					String name = spawner.getCreatureType().getName();
+					setSpawnType(spawner, event.getPlayer());
+					String newName = spawner.getCreatureType().getName();
+					event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + " is now: " + ChatColor.GREEN + newName);
+				}
 			}
 		}
 	}
@@ -182,16 +184,10 @@ public class AdjusterPlayerListener extends PlayerListener {
 			}
 			b++;
 			i++;
+			if(b > 3) {
+				//infinite loop protection.
+				return;
+			}
 		}
 	}
-	
-	boolean setToEnderman(CreatureSpawner spawner, Player player) {
-		if(SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Endermen") && SpawnerAdjuster.allowEnderman) {
-			spawner.setCreatureType(CreatureType.ENDERMAN);
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
 }

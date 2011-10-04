@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -32,7 +33,7 @@ public class AdjusterBlockListener extends BlockListener {
 	}
 	
 	public void onBlockBreak(BlockBreakEvent event) {
-		if(event.getBlock().getType() == Material.MOB_SPAWNER) {
+		if(event.getBlock().getType() == Material.MOB_SPAWNER && SpawnerAdjuster.useBlockListener) {
 			if(event.getPlayer() != null) {
 				if(!SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.BreakSpawners")) {
 					event.setCancelled(true);
@@ -42,5 +43,9 @@ public class AdjusterBlockListener extends BlockListener {
 			ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1);
 			event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), spawnerstack);
 		}
+	}
+	
+	public void onBlockPlace(BlockPlaceEvent event) {
+		//admin redstone thing here soon.
 	}
 }
