@@ -13,19 +13,19 @@ public class AdjusterBlockListener extends BlockListener {
 	}
 	
 	public void onBlockRedstoneChange(BlockRedstoneEvent event){
-		if(event.getBlock().getRelative(1, 0, 0).getType() == Material.MOB_SPAWNER) {
+		if(event.getBlock().getRelative(1, 0, 0).getType() == Material.MOB_SPAWNER && SpawnerAdjuster.useRedstoneListener) {
 			CreatureSpawner spawner = (CreatureSpawner) event.getBlock().getRelative(1, 0, 0).getState();
 			spawner.setDelay(1);
 		}
-		if(event.getBlock().getRelative(-1, 0, 0).getType() == Material.MOB_SPAWNER) {
+		if(event.getBlock().getRelative(-1, 0, 0).getType() == Material.MOB_SPAWNER && SpawnerAdjuster.useRedstoneListener) {
 			CreatureSpawner spawner = (CreatureSpawner) event.getBlock().getRelative(-1, 0, 0).getState();
 			spawner.setDelay(1);
 		}
-		if(event.getBlock().getRelative(0, 0, 1).getType() == Material.MOB_SPAWNER) {
+		if(event.getBlock().getRelative(0, 0, 1).getType() == Material.MOB_SPAWNER && SpawnerAdjuster.useRedstoneListener) {
 			CreatureSpawner spawner = (CreatureSpawner) event.getBlock().getRelative(0, 0, 1).getState();
 			spawner.setDelay(1);
 		}
-		if(event.getBlock().getRelative(0, 0, -1).getType() == Material.MOB_SPAWNER) {
+		if(event.getBlock().getRelative(0, 0, -1).getType() == Material.MOB_SPAWNER && SpawnerAdjuster.useRedstoneListener) {
 			CreatureSpawner spawner = (CreatureSpawner) event.getBlock().getRelative(0, 0, -1).getState();
 			spawner.setDelay(1);
 		}
