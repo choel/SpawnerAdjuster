@@ -113,7 +113,7 @@ public class Config {
 		}
 		
 		if(map.containsKey("spawner.allowSkeleton")) {
-			SpawnerAdjuster.allowSkeleton = configYAML.getBoolean("spawner.allowSkelton", true);
+			SpawnerAdjuster.allowSkeleton = configYAML.getBoolean("spawner.allowSkeleton", true);
 		} else {
 			configYAML.setProperty("spawner.allowSkeleton", SpawnerAdjuster.allowSkeleton); 
 		}

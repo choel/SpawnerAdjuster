@@ -19,7 +19,7 @@ import com.sadmean.mc.SpawnerAdjuster.Config.Config;
 public class SpawnerAdjuster extends JavaPlugin {
 
 	//internal stuff
-	static String mainDirectory = "plugins/ScubaKit"; //plugin directory
+	static String mainDirectory = "plugins/SpawnerAdjuster"; //plugin directory
 	private final AdjusterPlayerListener playerListener = new AdjusterPlayerListener(this); //the player listener.	
 	private final AdjusterBlockListener BlockListener = new AdjusterBlockListener(this); //the block listener.	
 	static public File configFile = new File(mainDirectory + File.separator + "config.yml"); //location of configfile. 
