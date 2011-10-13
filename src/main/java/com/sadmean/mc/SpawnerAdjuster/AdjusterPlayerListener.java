@@ -18,12 +18,20 @@ public class AdjusterPlayerListener extends PlayerListener {
 		if(event.getClickedBlock() == null) return;
 		if(event.getClickedBlock().getType() == Material.MOB_SPAWNER && SpawnerAdjuster.usePlayerListener) {
 			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.ChangeSpawnType")) {
-				if(event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR) {
+				if(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
 					CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
 					String name = spawner.getCreatureType().getName();
-					setSpawnType(spawner, event.getPlayer());
+					if(SpawnerAdjuster.opsChangeSpawnTypeOnly) {
+						if(event.getPlayer().isOp()) {
+							setSpawnType(spawner, event.getPlayer());
+						}
+					} else {
+						setSpawnType(spawner, event.getPlayer());
+					}
 					String newName = spawner.getCreatureType().getName();
 					event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + " is now: " + ChatColor.GREEN + newName);
+					event.setCancelled(true); //maybe prevent block placement?
+					spawner.setDelay(200);
 				}
 			}
 		}

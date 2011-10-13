@@ -31,9 +31,18 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean ignorePermissions = true;
 	public static boolean debugLogs = false;
 	public static boolean SuperPerms = false;
-	public static boolean usePlayerListener = true;
-	public static boolean useRedstoneListener = true;
-	public static boolean useBlockListener = true;
+	public static boolean usePlayerListener = true; //no longer changable in config
+	public static boolean useRedstoneListener = true; //no longer changable in config
+	public static boolean useBlockListener = true; //no longer changable in config
+	//1.1
+	public static boolean allowDroppedSpawners = true;
+	public static boolean ignore_opsOnly = false;
+	public static boolean ignore_OpsOnlyRedstone = false; //not yet used
+	public static boolean ignore_OpsOnlyChangeSpawner = false; //not yet used
+	public static boolean ignore_OpsOnlyDropSpanwers = false; //not yet used
+	public static boolean opsChangeSpawnTypeOnly = false;
+	public static boolean respondToRedstone = true;
+	public static boolean redstoneForcesSpawn = true;
 	//mob settings
 	public static boolean allowChicken = true;
 	public static boolean allowWolf = true;
@@ -74,15 +83,27 @@ public class SpawnerAdjuster extends JavaPlugin {
 				if (permissionsPlugin != null) {
 					this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
 				} else {
-					log_It("info", "Permission system not detected, ignorePermissions has be set to true");
-					ignorePermissions = true;
+					log_It("info", "Permission system not detected!");
+					//ignorePermissions = true;
+					if(!SuperPerms) {
+						log_It("info", "SuperPermissions also not found. Ignore Permissions forced to true");
+						ignorePermissions = true;
+					}
 				}
 			}
 		}
 	
 	public static boolean permCheck(Player player, String perm) {
 		if (ignorePermissions) {
+			if(ignore_opsOnly) {
+				if(player.isOp()) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
 			return true;
+			}
 		}
 		if(SuperPerms) {
 			if(player.hasPermission(perm)) {
@@ -164,6 +185,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 		} else { 
 			//it does exist?
 		}
+		setupPermissions();
 		Config.load();
 	}
 	

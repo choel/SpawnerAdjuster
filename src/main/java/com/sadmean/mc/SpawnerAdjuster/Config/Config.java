@@ -12,22 +12,22 @@ public class Config {
 		configYAML.load();
 		Map<String, Object> map = configYAML.getAll();
 		
-		if(map.containsKey("system.usePlayerListener")) {
-			SpawnerAdjuster.usePlayerListener = configYAML.getBoolean("system.usePlayerListener", true);
+		if(map.containsKey("system.onlyOpsChangeSpawnType")) {
+			SpawnerAdjuster.opsChangeSpawnTypeOnly = configYAML.getBoolean("system.opsChangeSpawnTypeOnly", configYAML.getBoolean("system.usePlayerListener", false));
 		} else {
-			configYAML.setProperty("system.usePlayerListener", SpawnerAdjuster.usePlayerListener); 
+			configYAML.setProperty("system.opsChangeSpawnTypeOnly", SpawnerAdjuster.opsChangeSpawnTypeOnly); 
 		}
 		
-		if(map.containsKey("system.useRedstoneListener")) {
-			SpawnerAdjuster.useRedstoneListener = configYAML.getBoolean("system.useRedstoneListener", true);
+		if(map.containsKey("system.SpawnersRespondToRedstone")) {
+			SpawnerAdjuster.respondToRedstone = configYAML.getBoolean("system.SpawnersRespondToRedstone", configYAML.getBoolean("system.useRedstoneListener", true));
 		} else {
-			configYAML.setProperty("system.useRedstoneListener", SpawnerAdjuster.useRedstoneListener); 
+			configYAML.setProperty("system.SpawnersRespondToRedstone", SpawnerAdjuster.respondToRedstone); 
 		}
 		
-		if(map.containsKey("system.useBlockListener")) {
-			SpawnerAdjuster.useBlockListener = configYAML.getBoolean("system.useBlockListener", true);
+		if(map.containsKey("system.allowDroppedSpawners")) {
+			SpawnerAdjuster.allowDroppedSpawners = configYAML.getBoolean("system.allowDroppedSpawners", configYAML.getBoolean("system.useBlockListener", true));
 		} else {
-			configYAML.setProperty("system.useBlockListener", SpawnerAdjuster.useBlockListener); 
+			configYAML.setProperty("system.allowDroppedSpawners", SpawnerAdjuster.allowDroppedSpawners); 
 		}
 		
 		if(map.containsKey("system.debugLogs")) {
@@ -46,6 +46,12 @@ public class Config {
 			SpawnerAdjuster.ignorePermissions = configYAML.getBoolean("system.ignorePermissions", true);
 		} else {
 			configYAML.setProperty("system.ignorePermissions", SpawnerAdjuster.ignorePermissions); 
+		}
+		
+		if(map.containsKey("system.redstoneForcesSpawn")) {
+			SpawnerAdjuster.redstoneForcesSpawn = configYAML.getBoolean("system.redstoneForcesSpawn", true);
+		} else {
+			configYAML.setProperty("system.redstoneForcesSpawn", SpawnerAdjuster.redstoneForcesSpawn); 
 		}
 		
 		//Spawner settings
@@ -157,6 +163,45 @@ public class Config {
 		} else {
 			configYAML.setProperty("spawner.allowGiant", SpawnerAdjuster.allowGiant); 
 		}
+		
+		//ignorePermissions extended
+		if(SpawnerAdjuster.ignorePermissions) {
+			/** This stuff not yet ready (or needed)
+			SpawnerAdjuster.log_It("info", "ignorePermissions is set to true, extending config");
+			
+			if(map.containsKey("ignorePermissions.OpAccessOnly")) {
+				SpawnerAdjuster.ignore_opsOnly = configYAML.getBoolean("ignorePermissions.OpAccessOnly", true);
+			} else {
+				configYAML.setProperty("ignorePermissions.OpAccessOnly", SpawnerAdjuster.ignore_opsOnly);
+			}
+			
+			
+			if(map.containsKey("ignorePermissions.OpsOnlyRedstone")) {
+				SpawnerAdjuster.ignore_OpsOnlyRedstone = configYAML.getBoolean("ignorePermissions.OpsOnlyRedstone", true);
+			} else {
+				configYAML.setProperty("ignorePermissions.OpsOnlyRedstone", SpawnerAdjuster.ignore_OpsOnlyRedstone); 
+			}
+			
+			if(map.containsKey("ignorePermissions.OpsOnlyChangeSpawner")) {
+				SpawnerAdjuster.ignore_OpsOnlyChangeSpawner = configYAML.getBoolean("ignorePermissions.OpsOnlyChangeSpawner", true);
+			} else {
+				configYAML.setProperty("ignorePermissions.OpsOnlyChangeSpawner", SpawnerAdjuster.ignore_OpsOnlyChangeSpawner); 
+			}
+			
+			if(map.containsKey("ignorePermissions.OpsOnlyDropSpanwers")) {
+				SpawnerAdjuster.ignore_OpsOnlyDropSpanwers = configYAML.getBoolean("ignorePermissions.OpsOnlyDropSpanwers", true);
+			} else {
+				configYAML.setProperty("ignorePermissions.OpsOnlyDropSpanwers", SpawnerAdjuster.ignore_OpsOnlyDropSpanwers); 
+			}
+			**/
+
+		}
+		//remove old values
+
+		map.remove("system.useBlockListener");	
+		map.remove("system.useRedstoneListener");	
+		map.remove("system.usePlayerListener");	
+		map.remove("system.useRestoneListener");
 		
 		if(configYAML.save()) {
 			return true;
