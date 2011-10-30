@@ -1,167 +1,177 @@
 package com.sadmean.mc.SpawnerAdjuster.Config;
 
-import java.util.Map;
-
-import org.bukkit.util.config.Configuration;
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
 import com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster;
 
 public class Config {
 	public static boolean load() {
-		Configuration configYAML = SpawnerAdjuster.getThisPlugin().getConfiguration();
-		configYAML.load();
-		Map<String, Object> map = configYAML.getAll();
+		FileConfiguration configYAML = SpawnerAdjuster.getThisPlugin().getConfig();
+		try {
+			configYAML.load(SpawnerAdjuster.configFile);
+		} catch (FileNotFoundException e1) {
+			SpawnerAdjuster.log_It("warning", "Error loading file: File not found:");
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			SpawnerAdjuster.log_It("warning", "Error loading file: Input output exception");
+			e1.printStackTrace();
+		} catch (InvalidConfigurationException e1) {
+			SpawnerAdjuster.log_It("warning", "Error loading file: Not a valid YAML");
+			e1.printStackTrace();
+		}
 		
-		if(map.containsKey("system.onlyOpsChangeSpawnType")) {
+		if(configYAML.contains("system.onlyOpsChangeSpawnType")) {
 			SpawnerAdjuster.opsChangeSpawnTypeOnly = configYAML.getBoolean("system.opsChangeSpawnTypeOnly", configYAML.getBoolean("system.usePlayerListener", false));
 		} else {
-			configYAML.setProperty("system.opsChangeSpawnTypeOnly", SpawnerAdjuster.opsChangeSpawnTypeOnly); 
+			configYAML.set("system.opsChangeSpawnTypeOnly", SpawnerAdjuster.opsChangeSpawnTypeOnly); 
 		}
 		
-		if(map.containsKey("system.SpawnersRespondToRedstone")) {
+		if(configYAML.contains("system.SpawnersRespondToRedstone")) {
 			SpawnerAdjuster.respondToRedstone = configYAML.getBoolean("system.SpawnersRespondToRedstone", configYAML.getBoolean("system.useRedstoneListener", true));
 		} else {
-			configYAML.setProperty("system.SpawnersRespondToRedstone", SpawnerAdjuster.respondToRedstone); 
+			configYAML.set("system.SpawnersRespondToRedstone", SpawnerAdjuster.respondToRedstone); 
 		}
 		
-		if(map.containsKey("system.allowDroppedSpawners")) {
+		if(configYAML.contains("system.allowDroppedSpawners")) {
 			SpawnerAdjuster.allowDroppedSpawners = configYAML.getBoolean("system.allowDroppedSpawners", configYAML.getBoolean("system.useBlockListener", true));
 		} else {
-			configYAML.setProperty("system.allowDroppedSpawners", SpawnerAdjuster.allowDroppedSpawners); 
+			configYAML.set("system.allowDroppedSpawners", SpawnerAdjuster.allowDroppedSpawners); 
 		}
 		
-		if(map.containsKey("system.debugLogs")) {
+		if(configYAML.contains("system.debugLogs")) {
 			SpawnerAdjuster.debugLogs = configYAML.getBoolean("system.debugLogs", true);
 		} else {
-			configYAML.setProperty("system.debugLogs", SpawnerAdjuster.debugLogs); 
+			configYAML.set("system.debugLogs", SpawnerAdjuster.debugLogs); 
 		}
 		
-		if(map.containsKey("system.SuperPerms")) {
+		if(configYAML.contains("system.SuperPerms")) {
 			SpawnerAdjuster.SuperPerms = configYAML.getBoolean("system.SuperPerms", true);
 		} else {
-			configYAML.setProperty("system.SuperPerms", SpawnerAdjuster.SuperPerms); 
+			configYAML.set("system.SuperPerms", SpawnerAdjuster.SuperPerms); 
 		}
 		
-		if(map.containsKey("system.ignorePermissions")) {
+		if(configYAML.contains("system.ignorePermissions")) {
 			SpawnerAdjuster.ignorePermissions = configYAML.getBoolean("system.ignorePermissions", true);
 		} else {
-			configYAML.setProperty("system.ignorePermissions", SpawnerAdjuster.ignorePermissions); 
+			configYAML.set("system.ignorePermissions", SpawnerAdjuster.ignorePermissions); 
 		}
 		
-		if(map.containsKey("system.redstoneForcesSpawn")) {
+		if(configYAML.contains("system.redstoneForcesSpawn")) {
 			SpawnerAdjuster.redstoneForcesSpawn = configYAML.getBoolean("system.redstoneForcesSpawn", true);
 		} else {
-			configYAML.setProperty("system.redstoneForcesSpawn", SpawnerAdjuster.redstoneForcesSpawn); 
+			configYAML.set("system.redstoneForcesSpawn", SpawnerAdjuster.redstoneForcesSpawn); 
 		}
 		
 		//Spawner settings
 		//Neutral Mobs
-		if(map.containsKey("spawner.allowChicken")) {
+		if(configYAML.contains("spawner.allowChicken")) {
 			SpawnerAdjuster.allowChicken = configYAML.getBoolean("spawner.allowChicken", true);
 		} else {
-			configYAML.setProperty("spawner.allowChicken", SpawnerAdjuster.allowChicken); 
+			configYAML.set("spawner.allowChicken", SpawnerAdjuster.allowChicken); 
 		}
 		
-		if(map.containsKey("spawner.allowWolf")) {
+		if(configYAML.contains("spawner.allowWolf")) {
 			SpawnerAdjuster.allowWolf = configYAML.getBoolean("spawner.allowWolf", true);
 		} else {
-			configYAML.setProperty("spawner.allowWolf", SpawnerAdjuster.allowWolf); 
+			configYAML.set("spawner.allowWolf", SpawnerAdjuster.allowWolf); 
 		}
 		
-		if(map.containsKey("spawner.allowSheep")) {
+		if(configYAML.contains("spawner.allowSheep")) {
 			SpawnerAdjuster.allowSheep = configYAML.getBoolean("spawner.allowSheep", true);
 		} else {
-			configYAML.setProperty("spawner.allowSheep", SpawnerAdjuster.allowSheep); 
+			configYAML.set("spawner.allowSheep", SpawnerAdjuster.allowSheep); 
 		}
 		
-		if(map.containsKey("spawner.allowCow")) {
+		if(configYAML.contains("spawner.allowCow")) {
 			SpawnerAdjuster.allowCow = configYAML.getBoolean("spawner.allowCow", true);
 		} else {
-			configYAML.setProperty("spawner.allowCow", SpawnerAdjuster.allowCow); 
+			configYAML.set("spawner.allowCow", SpawnerAdjuster.allowCow); 
 		}
 		
-		if(map.containsKey("spawner.allowSquid")) {
+		if(configYAML.contains("spawner.allowSquid")) {
 			SpawnerAdjuster.allowSquid = configYAML.getBoolean("spawner.allowSquid", false);
 		} else {
-			configYAML.setProperty("spawner.allowSquid", SpawnerAdjuster.allowSquid); 
+			configYAML.set("spawner.allowSquid", SpawnerAdjuster.allowSquid); 
 		}
 		
-		if(map.containsKey("spawner.allowPig")) {
+		if(configYAML.contains("spawner.allowPig")) {
 			SpawnerAdjuster.allowPig = configYAML.getBoolean("spawner.allowPig", true);
 		} else {
-			configYAML.setProperty("spawner.allowPig", SpawnerAdjuster.allowPig); 
+			configYAML.set("spawner.allowPig", SpawnerAdjuster.allowPig); 
 		}
 		
-		if(map.containsKey("spawner.allowEnderman")) {
+		if(configYAML.contains("spawner.allowEnderman")) {
 			SpawnerAdjuster.allowEnderman = configYAML.getBoolean("spawner.allowEnderman", true);
 		} else {
-			configYAML.setProperty("spawner.allowEnderman", SpawnerAdjuster.allowEnderman); 
+			configYAML.set("spawner.allowEnderman", SpawnerAdjuster.allowEnderman); 
 		}
 		
 		//Hostile Mobs
 		
-		if(map.containsKey("spawner.allowCaveSpider")) {
+		if(configYAML.contains("spawner.allowCaveSpider")) {
 			SpawnerAdjuster.allowCaveSpider = configYAML.getBoolean("spawner.allowCaveSpider", true);
 		} else {
-			configYAML.setProperty("spawner.allowCaveSpider", SpawnerAdjuster.allowCaveSpider); 
+			configYAML.set("spawner.allowCaveSpider", SpawnerAdjuster.allowCaveSpider); 
 		}
 		
-		if(map.containsKey("spawner.allowSpider")) {
+		if(configYAML.contains("spawner.allowSpider")) {
 			SpawnerAdjuster.allowSpider = configYAML.getBoolean("spawner.allowSpider", true);
 		} else {
-			configYAML.setProperty("spawner.allowSpider", SpawnerAdjuster.allowSpider);
+			configYAML.set("spawner.allowSpider", SpawnerAdjuster.allowSpider);
 		}
 		
-		if(map.containsKey("spawner.allowCreeper")) {
+		if(configYAML.contains("spawner.allowCreeper")) {
 			SpawnerAdjuster.allowCreeper = configYAML.getBoolean("spawner.allowCreeper", true);
 		} else {
-			configYAML.setProperty("spawner.allowCreeper", SpawnerAdjuster.allowCreeper); 
+			configYAML.set("spawner.allowCreeper", SpawnerAdjuster.allowCreeper); 
 		}
 		
-		if(map.containsKey("spawner.allowSkeleton")) {
+		if(configYAML.contains("spawner.allowSkeleton")) {
 			SpawnerAdjuster.allowSkeleton = configYAML.getBoolean("spawner.allowSkeleton", true);
 		} else {
-			configYAML.setProperty("spawner.allowSkeleton", SpawnerAdjuster.allowSkeleton); 
+			configYAML.set("spawner.allowSkeleton", SpawnerAdjuster.allowSkeleton); 
 		}
 		
-		if(map.containsKey("spawner.allowZombie")) {
+		if(configYAML.contains("spawner.allowZombie")) {
 			SpawnerAdjuster.allowZombie = configYAML.getBoolean("spawner.allowZombie", true);
 		} else {
-			configYAML.setProperty("spawner.allowZombie", SpawnerAdjuster.allowZombie); 
+			configYAML.set("spawner.allowZombie", SpawnerAdjuster.allowZombie); 
 		}
 		
-		if(map.containsKey("spawner.allowSilverfish")) {
+		if(configYAML.contains("spawner.allowSilverfish")) {
 			SpawnerAdjuster.allowSilverfish = configYAML.getBoolean("spawner.allowSilverfish", true);
 		} else {
-			configYAML.setProperty("spawner.allowSilverfish", SpawnerAdjuster.allowSilverfish); 
+			configYAML.set("spawner.allowSilverfish", SpawnerAdjuster.allowSilverfish); 
 		}
 		
-		if(map.containsKey("spawner.allowSlime")) {
+		if(configYAML.contains("spawner.allowSlime")) {
 			SpawnerAdjuster.allowSlime = configYAML.getBoolean("spawner.allowSlime", false);
 		} else {
-			configYAML.setProperty("spawner.allowSlime", SpawnerAdjuster.allowSlime); 
+			configYAML.set("spawner.allowSlime", SpawnerAdjuster.allowSlime); 
 		}
 		
 		//NetherMobs
 		
-		if(map.containsKey("spawner.allowGhast")) {
+		if(configYAML.contains("spawner.allowGhast")) {
 			SpawnerAdjuster.allowGhast = configYAML.getBoolean("spawner.allowGhast", true);
 		} else {
-			configYAML.setProperty("spawner.allowGhast", SpawnerAdjuster.allowGhast); 
+			configYAML.set("spawner.allowGhast", SpawnerAdjuster.allowGhast); 
 		}
 		
-		if(map.containsKey("spawner.allowPigZombie")) {
+		if(configYAML.contains("spawner.allowPigZombie")) {
 			SpawnerAdjuster.allowPigZombie = configYAML.getBoolean("spawner.allowPigZombie", true);
 		} else {
-			configYAML.setProperty("spawner.allowPigZombie", SpawnerAdjuster.allowPigZombie); 
+			configYAML.set("spawner.allowPigZombie", SpawnerAdjuster.allowPigZombie); 
 		}
 		
 		//WTF IS THIS SHIT?
 		
-		if(map.containsKey("spawner.allowGiant")) {
+		if(configYAML.contains("spawner.allowGiant")) {
 			SpawnerAdjuster.allowGiant = configYAML.getBoolean("spawner.allowGiant", true);
 		} else {
-			configYAML.setProperty("spawner.allowGiant", SpawnerAdjuster.allowGiant); 
+			configYAML.set("spawner.allowGiant", SpawnerAdjuster.allowGiant); 
 		}
 		
 		//ignorePermissions extended
@@ -169,44 +179,47 @@ public class Config {
 			/** This stuff not yet ready (or needed)
 			SpawnerAdjuster.log_It("info", "ignorePermissions is set to true, extending config");
 			
-			if(map.containsKey("ignorePermissions.OpAccessOnly")) {
+			if(configYAML.contains("ignorePermissions.OpAccessOnly")) {
 				SpawnerAdjuster.ignore_opsOnly = configYAML.getBoolean("ignorePermissions.OpAccessOnly", true);
 			} else {
-				configYAML.setProperty("ignorePermissions.OpAccessOnly", SpawnerAdjuster.ignore_opsOnly);
+				configYAML.set("ignorePermissions.OpAccessOnly", SpawnerAdjuster.ignore_opsOnly);
 			}
 			
 			
-			if(map.containsKey("ignorePermissions.OpsOnlyRedstone")) {
+			if(configYAML.contains("ignorePermissions.OpsOnlyRedstone")) {
 				SpawnerAdjuster.ignore_OpsOnlyRedstone = configYAML.getBoolean("ignorePermissions.OpsOnlyRedstone", true);
 			} else {
-				configYAML.setProperty("ignorePermissions.OpsOnlyRedstone", SpawnerAdjuster.ignore_OpsOnlyRedstone); 
+				configYAML.set("ignorePermissions.OpsOnlyRedstone", SpawnerAdjuster.ignore_OpsOnlyRedstone); 
 			}
 			
-			if(map.containsKey("ignorePermissions.OpsOnlyChangeSpawner")) {
+			if(configYAML.contains("ignorePermissions.OpsOnlyChangeSpawner")) {
 				SpawnerAdjuster.ignore_OpsOnlyChangeSpawner = configYAML.getBoolean("ignorePermissions.OpsOnlyChangeSpawner", true);
 			} else {
-				configYAML.setProperty("ignorePermissions.OpsOnlyChangeSpawner", SpawnerAdjuster.ignore_OpsOnlyChangeSpawner); 
+				configYAML.set("ignorePermissions.OpsOnlyChangeSpawner", SpawnerAdjuster.ignore_OpsOnlyChangeSpawner); 
 			}
 			
-			if(map.containsKey("ignorePermissions.OpsOnlyDropSpanwers")) {
+			if(configYAML.contains("ignorePermissions.OpsOnlyDropSpanwers")) {
 				SpawnerAdjuster.ignore_OpsOnlyDropSpanwers = configYAML.getBoolean("ignorePermissions.OpsOnlyDropSpanwers", true);
 			} else {
-				configYAML.setProperty("ignorePermissions.OpsOnlyDropSpanwers", SpawnerAdjuster.ignore_OpsOnlyDropSpanwers); 
+				configYAML.set("ignorePermissions.OpsOnlyDropSpanwers", SpawnerAdjuster.ignore_OpsOnlyDropSpanwers); 
 			}
 			**/
 
 		}
 		//remove old values
 
-		map.remove("system.useBlockListener");	
-		map.remove("system.useRedstoneListener");	
-		map.remove("system.usePlayerListener");	
-		map.remove("system.useRestoneListener");
+		configYAML.set("system.useBlockListener", null);	
+		configYAML.set("system.useRedstoneListener", null);	
+		configYAML.set("system.usePlayerListener", null);	
+		configYAML.set("system.useRestoneListener", null);
 		
-		if(configYAML.save()) {
-			return true;
-		} else {
+		try {
+			configYAML.save(SpawnerAdjuster.configFile);
+		} catch (IOException e) {
+			SpawnerAdjuster.log_It("warning", "Error saving file:");
+			e.printStackTrace();
 			return false;
 		}
+		return true;
 	}
 }

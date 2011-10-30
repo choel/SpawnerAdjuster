@@ -192,7 +192,7 @@ public class AdjusterPlayerListener extends PlayerListener {
 			}
 			b++;
 			i++;
-			if(b > 3) {
+			if(b > 20) {
 				//infinite loop protection.
 				return;
 			}
