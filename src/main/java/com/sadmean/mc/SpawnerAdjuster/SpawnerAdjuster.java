@@ -43,6 +43,9 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean opsChangeSpawnTypeOnly = false;
 	public static boolean respondToRedstone = true;
 	public static boolean redstoneForcesSpawn = true;
+	//1.2
+	public static boolean deactivedByRedstoneStatus = false;
+	public static boolean mustHaveValidPermissionsToAlterSpawner = false;
 	//mob settings
 	public static boolean allowChicken = true;
 	public static boolean allowWolf = true;
@@ -61,6 +64,17 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean allowPigZombie = true;
 	public static boolean allowGiant = true;
 	public static boolean allowPig = true;
+	//Minecraft 1.0.0
+	public static boolean allowBlaze = true;
+	public static boolean allowEnderDragon = true;
+	public static boolean allowMagmaCube = true;
+	public static boolean allowMooshroom = true;
+	public static boolean allowVillager = true;
+	public static boolean allowSnowGolem = true;
+	
+	//force spawn settings
+	public static int maxNumberOfEntsNearSpawner = 6;
+	public static int spawnerEntCheckRadius = 6;
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 
@@ -102,7 +116,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 					return false;
 				}
 			} else {
-			return true;
+				return true;
 			}
 		}
 		if(SuperPerms) {

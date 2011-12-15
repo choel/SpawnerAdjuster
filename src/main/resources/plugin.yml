@@ -1,6 +1,6 @@
 name: SpawnerAdjuster
 main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
-version: 1.1.1
+version: 1.2.0
 author: Choelian
 softdepend: [Permissions]
 permissions:
@@ -9,6 +9,7 @@ permissions:
         children:
             SpawnerAdjuster.SetMobs.*: true
             SpawnerAdjuster.BreakSpawners: true
+            SpawnerAdjuster.DropSpawners: true
         default: true
     SpawnerAdjuster.SetMobs.*:
         description: Allows players to set all mob types on a monster spawner
@@ -16,6 +17,8 @@ permissions:
             SpawnerAdjuster.SetMobs.Neutral.*: true
             SpawnerAdjuster.SetMobs.Nether.*: true
             SpawnerAdjuster.SetMobs.Hostile.*: true
+            SpawnerAdjuster.SetMobs.Utility.*: true
+            SpawnerAdjuster.SetMobs.Boss.*: true
             SpawnerAdjuster.SetMobs.Unused.*: true
         default: true
     SpawnerAdjuster.SetMobs.Neutral.*:
@@ -27,6 +30,8 @@ permissions:
             SpawnerAdjuster.SetMobs.Neutral.Sheep: true
             SpawnerAdjuster.SetMobs.Neutral.Cow: true
             SpawnerAdjuster.SetMobs.Neutral.Squid: true
+            SpawnerAdjuster.SetMobs.Neutral.Mooshroom: true
+            SpawnerAdjuster.SetMobs.Neutral.Villager: true
         default: true
     SpawnerAdjuster.SetMobs.Hostile.*:
         description: Allows players to set all HOSTILE mob types on a monster spawner
@@ -43,13 +48,28 @@ permissions:
         children:
             SpawnerAdjuster.SetMobs.Nether.Ghast: true
             SpawnerAdjuster.SetMobs.Nether.PigZombie: true
+            SpawnerAdjuster.SetMobs.Nether.Blaze: true
+            SpawnerAdjuster.SetMobs.Nether.MagmaCube: true
         default: true
     SpawnerAdjuster.SetMobs.Unused.*:
         description: Allows players to set all Unsued mob types on a monster spawner
         children:
             SpawnerAdjuster.SetMobs.Unused.Giant: true
         default: true
+    SpawnerAdjuster.SetMobs.Utility.*:
+        description: Allows players to set all Unsued mob types on a monster spawner
+        children:
+            SpawnerAdjuster.SetMobs.Utility.SnowGolem: true
+        default: true
+    SpawnerAdjuster.SetMobs.Boss.*:
+        description: Allows players to set all Unsued mob types on a monster spawner
+        children:
+            SpawnerAdjuster.SetMobs.Boss.EnderDragon: true
+        default: true
     SpawnerAdjuster.BreakSpawners:
+        description: Allows players to break a monster spawner
+        default: true
+    SpawnerAdjuster.DropSpawners:
         description: Allows players to break a monster spawner
         default: true
     SpawnerAdjuster.SetMobs.Unused.Giant:
@@ -97,4 +117,21 @@ permissions:
     SpawnerAdjuster.SetMobs.Neutral.Squid:
         description: Allows a player to set a Monster Spawner to spawn Squid which is a bad idea
         default: true
-    
+    SpawnerAdjuster.SetMobs.Boss.EnderDragon:
+        description: Allows a player to set a Monster Spawner to spawn Ender Dragons
+        default: true
+    SpawnerAdjuster.SetMobs.Utility.SnowGolem:
+        description: Allows a player to set a Monster Spawner to spawn Snow Golems
+        default: true
+    SpawnerAdjuster.SetMobs.Nether.Blaze:
+        description: Allows a player to set a Monster Spawner to spawn Blazes
+        default: true
+    SpawnerAdjuster.SetMobs.Nether.MagmaCube:
+        description: Allows a player to set a Monster Spawner to spawn a Magma Cubes. The hell
+        default: true
+    SpawnerAdjuster.SetMobs.Neutral.Villager:
+        description: Allows a player to set a Monster Spawner to spawn friends
+        default: true
+    SpawnerAdjuster.SetMobs.Neutral.Mooshroom:
+        description: Allows a player to set a Monster Spawner to spawn Mooshrooms
+        default: true

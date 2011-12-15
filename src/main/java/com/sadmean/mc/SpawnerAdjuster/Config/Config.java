@@ -58,6 +58,30 @@ public class Config {
 			configYAML.set("system.ignorePermissions", SpawnerAdjuster.ignorePermissions); 
 		}
 		
+		if(configYAML.contains("system.deactivedByRedstoneStatus")) {
+			SpawnerAdjuster.deactivedByRedstoneStatus = configYAML.getBoolean("system.deactivedByRedstoneStatus", false);
+		} else {
+			configYAML.set("system.deactivedByRedstoneStatus", SpawnerAdjuster.deactivedByRedstoneStatus); 
+		}
+		
+		if(configYAML.contains("system.mustHaveValidPermissionsToAlterSpawner")) {
+			SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner = configYAML.getBoolean("system.mustHaveValidPermissionsToAlterSpawner", false);
+		} else {
+			configYAML.set("system.mustHaveValidPermissionsToAlterSpawner", SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner); 
+		}
+		
+		if(configYAML.contains("system.maxNumberOfEntsNearSpawner")) {
+			SpawnerAdjuster.maxNumberOfEntsNearSpawner = configYAML.getInt("system.maxNumberOfEntsNearSpawner", 6);
+		} else {
+			configYAML.set("system.maxNumberOfEntsNearSpawner", SpawnerAdjuster.maxNumberOfEntsNearSpawner); 
+		}
+		
+		if(configYAML.contains("system.spawnerEntCheckRadius")) {
+			SpawnerAdjuster.spawnerEntCheckRadius = configYAML.getInt("system.spawnerEntCheckRadius", 6);
+		} else {
+			configYAML.set("system.spawnerEntCheckRadius", SpawnerAdjuster.spawnerEntCheckRadius); 
+		}
+		
 		if(configYAML.contains("system.redstoneForcesSpawn")) {
 			SpawnerAdjuster.redstoneForcesSpawn = configYAML.getBoolean("system.redstoneForcesSpawn", true);
 		} else {
@@ -88,6 +112,42 @@ public class Config {
 			SpawnerAdjuster.allowCow = configYAML.getBoolean("spawner.allowCow", true);
 		} else {
 			configYAML.set("spawner.allowCow", SpawnerAdjuster.allowCow); 
+		}
+		
+		if(configYAML.contains("spawner.allowBlaze")) {
+			SpawnerAdjuster.allowBlaze = configYAML.getBoolean("spawner.allowBlaze", false);
+		} else {
+			configYAML.set("spawner.allowBlaze", SpawnerAdjuster.allowBlaze); 
+		}
+		
+		if(configYAML.contains("spawner.allowEnderDragon")) {
+			SpawnerAdjuster.allowEnderDragon = configYAML.getBoolean("spawner.allowEnderDragon", false);
+		} else {
+			configYAML.set("spawner.allowEnderDragon", SpawnerAdjuster.allowEnderDragon); 
+		}
+		
+		if(configYAML.contains("spawner.allowMagmaCube")) {
+			SpawnerAdjuster.allowMagmaCube = configYAML.getBoolean("spawner.allowMagmaCube", false);
+		} else {
+			configYAML.set("spawner.allowMagmaCube", SpawnerAdjuster.allowMagmaCube); 
+		}
+		
+		if(configYAML.contains("spawner.allowMooShroom")) {
+			SpawnerAdjuster.allowMooshroom = configYAML.getBoolean("spawner.allowMooShroom", false);
+		} else {
+			configYAML.set("spawner.allowMooShroom", SpawnerAdjuster.allowMooshroom); 
+		}
+		
+		if(configYAML.contains("spawner.allowSnowGolem")) {
+			SpawnerAdjuster.allowSnowGolem = configYAML.getBoolean("spawner.allowSnowGolem", false);
+		} else {
+			configYAML.set("spawner.allowSnowGolem", SpawnerAdjuster.allowSnowGolem); 
+		}
+		
+		if(configYAML.contains("spawner.allowVillager")) {
+			SpawnerAdjuster.allowVillager = configYAML.getBoolean("spawner.allowVillager", false);
+		} else {
+			configYAML.set("spawner.allowVillager", SpawnerAdjuster.allowVillager); 
 		}
 		
 		if(configYAML.contains("spawner.allowSquid")) {

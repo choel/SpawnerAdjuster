@@ -2,7 +2,6 @@ package com.sadmean.mc.SpawnerAdjuster;
 
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
-import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -62,7 +61,7 @@ public class AdjusterBlockListener extends BlockListener {
 					return;
 				}
 			}
-			if(!SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.DropSpawners") && SpawnerAdjuster.allowDroppedSpawners) {
+			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.DropSpawners") && SpawnerAdjuster.allowDroppedSpawners) {
 				ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1);
 				event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), spawnerstack);
 			}
@@ -83,8 +82,8 @@ public class AdjusterBlockListener extends BlockListener {
 				for(int dz = -(range); dz <= range && !reset; dz++) {
 					if(spawner.getBlock().getRelative(dx, dy, dz).getType() == Material.AIR) {
 						LivingEntity spawnedEnt = spawner.getWorld().spawnCreature(spawner.getBlock().getRelative(dx, dy, dz).getLocation(), spawner.getCreatureType());
-						List<Entity> entList = spawnedEnt.getNearbyEntities(6, 6, 6);
-						int i = 0; //index
+						List<Entity> entList = spawnedEnt.getNearbyEntities(SpawnerAdjuster.spawnerEntCheckRadius, SpawnerAdjuster.spawnerEntCheckRadius, SpawnerAdjuster.spawnerEntCheckRadius);
+						///int i = 0; //index
 						int numEntsofType = 0; //number of matching ents
 						/** this check needs work. Next version!
 						while(i <= entList.size()) {
@@ -95,7 +94,7 @@ public class AdjusterBlockListener extends BlockListener {
 						}
 						**/
 						numEntsofType = entList.size();
-						if(numEntsofType >= 6) {
+						if(numEntsofType >= SpawnerAdjuster.maxNumberOfEntsNearSpawner) {
 							spawnedEnt.remove();
 						}
 						reset = true;
