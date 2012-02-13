@@ -2,7 +2,9 @@ package com.sadmean.mc.SpawnerAdjuster;
 
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
+import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
@@ -119,7 +121,8 @@ public class AdjusterBlockListener extends BlockListener {
 				}
 			}
 			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.DropSpawners") && SpawnerAdjuster.allowDroppedSpawners) {
-				ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1);
+				short asdf = 1;
+				ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1, asdf, event.getBlock().getData());
 				event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), spawnerstack);
 			}
 		}
@@ -130,9 +133,9 @@ public class AdjusterBlockListener extends BlockListener {
 	}
 	
 	private void forceSpawn(CreatureSpawner spawner) {
+
 		int range = 1;
 		boolean reset = false;
-		//Object instance;
 		//if(spawner.getCreatureType() == CreatureType.SKELETON)
 		for(int dx = -(range); dx <= range && !reset; dx++) {
 			for(int dy = -(range); dy <= range && !reset; dy++) {
@@ -155,6 +158,12 @@ public class AdjusterBlockListener extends BlockListener {
 							spawnedEnt.remove();
 						}
 						reset = true;
+						/* anti-munson implement here */
+						Creature creature_cast = (Creature)spawnedEnt;
+						if(!SpawnerAdjuster.canSpawn(spawner, creature_cast)) {
+							spawnedEnt.remove();
+						}
+						/* end anti munson implement */	
 					}
 				}
 			}

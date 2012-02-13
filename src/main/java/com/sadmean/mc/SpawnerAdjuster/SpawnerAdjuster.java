@@ -2,9 +2,16 @@ package com.sadmean.mc.SpawnerAdjuster;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
+import org.bukkit.World;
+import org.bukkit.block.CreatureSpawner;
+import org.bukkit.entity.Creature;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
@@ -71,10 +78,15 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean allowMooshroom = true;
 	public static boolean allowVillager = true;
 	public static boolean allowSnowGolem = true;
+	//1.3
+	public static ArrayList<Creature> creature_Store;
+	public static ArrayList<CreatureSpawner> spawner_Store;
+	public static ArrayList<Integer> entries;
 	
 	//force spawn settings
 	public static int maxNumberOfEntsNearSpawner = 6;
 	public static int spawnerEntCheckRadius = 6;
+	public static int TotalSpawnedEnts = 50;
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 
@@ -89,6 +101,11 @@ public class SpawnerAdjuster extends JavaPlugin {
     public void onLoad() //onLoad is called the instant this plugin is touched.
     {
         setThisPlugin(this); //not 100% sure
+        
+        //initalize our arrays
+        creature_Store = new ArrayList();
+        spawner_Store = new ArrayList();
+        entries = new ArrayList();
     }
 	 
 	private void setupPermissions() {
@@ -100,8 +117,8 @@ public class SpawnerAdjuster extends JavaPlugin {
 					log_It("info", "Permission system not detected!");
 					//ignorePermissions = true;
 					if(!SuperPerms) {
-						log_It("info", "SuperPermissions also not found. Ignore Permissions forced to true");
-						ignorePermissions = true;
+						log_It("info", "SuperPermissions also not found. Your settings are probably incorrect.");
+						//ignorePermissions = true;
 					}
 				}
 			}
@@ -183,29 +200,84 @@ public class SpawnerAdjuster extends JavaPlugin {
 	
 	public void onEnable() {
 		PluginManager pm = this.getServer().getPluginManager(); //register this plugin
-		log_It("info", "Enable Started");
 		if(usePlayerListener) pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Event.Priority.Normal, this); //register our playerListener
 		if(useBlockListener) pm.registerEvent(Event.Type.BLOCK_BREAK, BlockListener, Event.Priority.Normal, this);
 		if(useRedstoneListener) pm.registerEvent(Event.Type.REDSTONE_CHANGE, BlockListener, Event.Priority.Normal, this);
 		new File(mainDirectory).mkdir();  //makes our directory if needed
 		if(!configFile.exists()){ //if your config does not exist then ...
 	         try {
-	        	log_It("info", "No config defected. Attempting to create.");
+	        	log_It("info", "No config defected. Attempting to create...");
 	        	configFile.createNewFile(); //... we create it then ...
 	         } catch (IOException ex) { 
 	             ex.printStackTrace(); //not needed anymore probably
 	         }
 	 
 		} else { 
-			//it does exist?
+			log_It("info", "Config file exists. Loading...");
 		}
 		setupPermissions();
 		Config.load();
+		
+		//set up repeating task to clean monster spawner arrays
+		int taskID = getThisPlugin().getServer().getScheduler().scheduleSyncRepeatingTask(getThisPlugin(), new Runnable() {
+
+		    public void run() {
+		    	//clear non-existant creatures out of storage
+		    	int i = 0;
+		    	Iterator<Creature> iterator = creature_Store.iterator();
+		    	while(iterator.hasNext()) {
+		    		if(iterator.next().isDead()) iterator.remove();
+		    	}
+		    	//decrement ALL entries
+		    	/* disabed for now, may not actually need
+		    	int point = 0;
+		    	Iterator<Integer> itr = entries.iterator();
+		    	while(itr.hasNext()) {
+		    		if(itr.next() == 0) {
+		    			itr.remove();
+		    			spawner_Store.remove(point);
+		    		} else {
+		    			entries.set(point, itr.next() - 1);
+		    		}
+		    		point++;
+		    	}
+		        */
+		    }
+		}, 60L, 65L);
+		if(taskID < 0) {
+			log_It("warning", "Unable to set creature array cleaning task");
+		} else {
+			log_It("info", "Creature storage array cleaning task set with ID: " + Integer.toString(taskID));
+		}
+		log_It("info", "Loading complete");
 	}
 	
 	public void onDisable() {
 		
 	}
 	
+	public static void addToSpawner(CreatureSpawner spawner) {
+		if(!spawner_Store.contains(spawner)) {
+			spawner_Store.add(spawner);
+			entries.add(1);
+		} else {
+			int i =spawner_Store.indexOf(spawner); 
+			int setter = entries.get(i);
+			setter++;
+			entries.set(i, setter);
+		}
+	}
+	
+	public static boolean canSpawn(CreatureSpawner spawner, Creature ent) {
+		creature_Store.add(ent);
+		int point = 0;
+		if(spawner_Store.contains(spawner)) {
+			point = spawner_Store.indexOf(spawner);
+			if(entries.get(point) >= 10 || creature_Store.size() > TotalSpawnedEnts) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 }

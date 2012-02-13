@@ -76,6 +76,12 @@ public class Config {
 			configYAML.set("system.maxNumberOfEntsNearSpawner", SpawnerAdjuster.maxNumberOfEntsNearSpawner); 
 		}
 		
+		if(configYAML.contains("system.TotalSpawnedEnts")) {
+			SpawnerAdjuster.TotalSpawnedEnts = configYAML.getInt("system.TotalSpawnedEnts", 50);
+		} else {
+			configYAML.set("system.TotalSpawnedEnts", SpawnerAdjuster.TotalSpawnedEnts); 
+		}
+		
 		if(configYAML.contains("system.spawnerEntCheckRadius")) {
 			SpawnerAdjuster.spawnerEntCheckRadius = configYAML.getInt("system.spawnerEntCheckRadius", 6);
 		} else {
