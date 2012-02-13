@@ -5,18 +5,21 @@ import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerListener;
 
-public class AdjusterPlayerListener extends PlayerListener {
+public class AdjusterPlayerListener implements Listener {
 	public static SpawnerAdjuster plugin; public AdjusterPlayerListener(SpawnerAdjuster instance) { 
 		plugin = instance;
 	}
 	
+	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		if(event.getClickedBlock() == null) return;
-		if(event.getClickedBlock().getType() == Material.MOB_SPAWNER && SpawnerAdjuster.usePlayerListener) {
+		if(event.getClickedBlock() == null || !SpawnerAdjuster.usePlayerListener) return;
+		if(event.getClickedBlock().getType() == Material.MOB_SPAWNER) {
 			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.ChangeSpawnType")) {
 				if(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
 					CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
