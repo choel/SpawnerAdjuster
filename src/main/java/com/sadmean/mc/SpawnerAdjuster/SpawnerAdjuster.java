@@ -30,17 +30,19 @@ public class SpawnerAdjuster extends JavaPlugin {
 	private final AdjusterPlayerListener playerListener = new AdjusterPlayerListener(this); //the player listener.	
 	private final AdjusterBlockListener BlockListener = new AdjusterBlockListener(this); //the block listener.	
 	static public File configFile = new File(mainDirectory + File.separator + "config.yml"); //location of configfile. 
-	public static PermissionHandler permissionHandler; //permissions handler
+	public PermissionHandler permissionHandler; //permissions handler
     private static SpawnerAdjuster thisPlugin = null; //I don't know what this does. Necessary for fancy log
 	public static Logger log = Logger.getLogger("Minecraft"); //logger object. can be written to directly with "log.info("herp derp")
     public static String chatPrefix = ChatColor.DARK_AQUA + "[SA] " + ChatColor.GRAY;
+    private static PluginDescriptionFile thisYAML;
+    private static String pluginName, pluginVersion, fullName;
 	//SETTINGS -to be loaded from config later
 	public static boolean ignorePermissions = true;
 	public static boolean debugLogs = false;
 	public static boolean SuperPerms = false;
-	public static boolean usePlayerListener = true; //no longer changable in config
-	public static boolean useRedstoneListener = true; //no longer changable in config
-	public static boolean useBlockListener = true; //no longer changable in config
+	public static boolean usePlayerListener = true; //no longer changeable in config
+	public static boolean useRedstoneListener = true; //no longer changeable in config
+	public static boolean useBlockListener = true; //no longer changeable in config
 	//1.1
 	public static boolean allowDroppedSpawners = true;
 	public static boolean ignore_opsOnly = false;
@@ -102,7 +104,7 @@ public class SpawnerAdjuster extends JavaPlugin {
     {
         setThisPlugin(this); //not 100% sure
         
-        //initalize our arrays
+        //initialize our arrays
         creature_Store = new ArrayList();
         spawner_Store = new ArrayList();
         entries = new ArrayList();
@@ -169,10 +171,6 @@ public class SpawnerAdjuster extends JavaPlugin {
 	 * @param message
 	 */
 	public static void log_It(String level, String message) {
-		PluginDescriptionFile thisYAML = getThisPlugin().getDescription();
-		String pluginName = thisYAML.getName();
-		String pluginVersion = thisYAML.getVersion();
-		String fullName = "[" + pluginName + "][" + pluginVersion + "] ";
 		//convert our level into an int for logging
 		int level_int = 6;
 		
@@ -199,10 +197,13 @@ public class SpawnerAdjuster extends JavaPlugin {
 	}
 	
 	public void onEnable() {
+		thisYAML = this.getDescription();
+		pluginName = thisYAML.getName();
+		pluginVersion = thisYAML.getVersion();
+		fullName = "[" + pluginName + "][" + pluginVersion + "] ";
 		PluginManager pm = this.getServer().getPluginManager(); //register this plugin
-		if(usePlayerListener) pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Event.Priority.Normal, this); //register our playerListener
-		if(useBlockListener) pm.registerEvent(Event.Type.BLOCK_BREAK, BlockListener, Event.Priority.Normal, this);
-		if(useRedstoneListener) pm.registerEvent(Event.Type.REDSTONE_CHANGE, BlockListener, Event.Priority.Normal, this);
+		if(usePlayerListener) pm.registerEvents(playerListener, this); //register our playerListener
+		if(useBlockListener || useRedstoneListener) pm.registerEvents(BlockListener, this);
 		new File(mainDirectory).mkdir();  //makes our directory if needed
 		if(!configFile.exists()){ //if your config does not exist then ...
 	         try {
