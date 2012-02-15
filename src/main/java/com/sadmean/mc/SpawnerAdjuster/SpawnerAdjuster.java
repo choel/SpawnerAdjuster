@@ -30,7 +30,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	private final AdjusterPlayerListener playerListener = new AdjusterPlayerListener(this); //the player listener.	
 	private final AdjusterBlockListener BlockListener = new AdjusterBlockListener(this); //the block listener.	
 	static public File configFile = new File(mainDirectory + File.separator + "config.yml"); //location of configfile. 
-	public PermissionHandler permissionHandler; //permissions handler
+	public static PermissionHandler permissionHandler; //permissions handler
     private static SpawnerAdjuster thisPlugin = null; //I don't know what this does. Necessary for fancy log
 	public static Logger log = Logger.getLogger("Minecraft"); //logger object. can be written to directly with "log.info("herp derp")
     public static String chatPrefix = ChatColor.DARK_AQUA + "[SA] " + ChatColor.GRAY;
@@ -115,6 +115,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 			if (this.permissionHandler == null) {
 				if (permissionsPlugin != null) {
 					this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
+					log_It("info", "Legacy Permissions support will be going away in the future, please switch to a new permission system soon");
 				} else {
 					log_It("info", "Permission system not detected!");
 					//ignorePermissions = true;
@@ -224,7 +225,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 
 		    public void run() {
 		    	//clear non-existant creatures out of storage
-		    	int i = 0;
+		    	//int i = 0;
 		    	Iterator<Creature> iterator = creature_Store.iterator();
 		    	while(iterator.hasNext()) {
 		    		if(iterator.next().isDead()) iterator.remove();

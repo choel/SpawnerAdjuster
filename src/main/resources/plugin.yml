@@ -1,6 +1,6 @@
 name: SpawnerAdjuster
 main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
-version: 1.3.0 BETA
+version: 1.3.0
 author: Choelian
 softdepend: [Permissions]
 permissions:
