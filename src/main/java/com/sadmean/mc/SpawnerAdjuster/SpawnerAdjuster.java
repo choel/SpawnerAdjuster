@@ -4,16 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Creature;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -116,8 +112,9 @@ public class SpawnerAdjuster extends JavaPlugin {
 				if (permissionsPlugin != null) {
 					this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
 					log_It("info", "Legacy Permissions support will be going away in the future, please switch to a new permission system soon");
+					log_It("info", "PermissionsEX, bPermissions and bukkitPermissions are all good ones. Visit bukkit.org!");
 				} else {
-					log_It("info", "Permission system not detected!");
+					log_It("info", "Legacy Permission system not detected!");
 					//ignorePermissions = true;
 					if(!SuperPerms) {
 						log_It("info", "SuperPermissions also not found. Your settings are probably incorrect.");
@@ -217,8 +214,9 @@ public class SpawnerAdjuster extends JavaPlugin {
 		} else { 
 			log_It("info", "Config file exists. Loading...");
 		}
+		Config.load(); ///AHHH REALLY? WRONG FUCKING ORDER
 		setupPermissions();
-		Config.load();
+
 		
 		//set up repeating task to clean monster spawner arrays
 		int taskID = getThisPlugin().getServer().getScheduler().scheduleSyncRepeatingTask(getThisPlugin(), new Runnable() {
