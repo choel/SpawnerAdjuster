@@ -130,6 +130,14 @@ public class AdjusterPlayerListener implements Listener {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Unused.Giant") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 21;
 		}
+		if (spawner.getCreatureType() == CreatureType.OCELOT){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Ocelot") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 22;
+		}
+		if (spawner.getCreatureType() == CreatureType.IRON_GOLEM){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Utility.IronGolem") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 23;
+		}
 		//if i is still -1, then we have an unknown mob type. We should not play with that spawner
 		if(i == -1) {
 			SpawnerAdjuster.log_It("warning", "unkown mob type error");
@@ -140,7 +148,7 @@ public class AdjusterPlayerListener implements Listener {
 		//i--;
 		int b = 0;
 		while(i != initalvalue || b == 0) {
-			if(i >= 22) i = 0;
+			if(i >= 24) i = 0;
 
 			if(i == 0 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Spider") && SpawnerAdjuster.allowSpider) {
 				spawner.setCreatureType(CreatureType.SPIDER);
@@ -226,7 +234,15 @@ public class AdjusterPlayerListener implements Listener {
 				spawner.setCreatureType(CreatureType.GIANT);
 				return;
 			}
-			if(i == 21 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.allowCaveSpider) {
+			if(i == 21 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Ocelot") && SpawnerAdjuster.allowOcelot) {
+				spawner.setCreatureType(CreatureType.Ocelot);
+				return;
+			}
+			if(i == 22 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.IronGolem") && SpawnerAdjuster.allowIronGolem) {
+				spawner.setCreatureType(CreatureType.Iron_Golem);
+				return;
+			}
+			if(i == 23 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.allowCaveSpider) {
 				spawner.setCreatureType(CreatureType.CAVE_SPIDER);
 				return;
 			}

@@ -76,6 +76,8 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean allowMooshroom = true;
 	public static boolean allowVillager = true;
 	public static boolean allowSnowGolem = true;
+	public static boolean allowOcelot = true;
+	public static boolean allowIronGolem = true;
 	//1.3
 	public static ArrayList<Creature> creature_Store;
 	public static ArrayList<CreatureSpawner> spawner_Store;
@@ -85,6 +87,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static int maxNumberOfEntsNearSpawner = 6;
 	public static int spawnerEntCheckRadius = 6;
 	public static int TotalSpawnedEnts = 50;
+	
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 
@@ -105,14 +108,23 @@ public class SpawnerAdjuster extends JavaPlugin {
         spawner_Store = new ArrayList();
         entries = new ArrayList();
     }
-	 
+	
+    /**
+     * legacy permissions support to be dropped in 1.5
+     * @deprecated
+     */
 	private void setupPermissions() {
 		Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
 			if (this.permissionHandler == null) {
 				if (permissionsPlugin != null) {
 					this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
-					log_It("info", "Legacy Permissions support will be going away in the future, please switch to a new permission system soon");
-					log_It("info", "PermissionsEX, bPermissions and bukkitPermissions are all good ones. Visit bukkit.org!");
+					if(ignorePermissions || SuperPerms) {
+						//Legacy permissions found, but we're not using them so lets just null it back out
+						this.permissionHandler = null;
+					} else {
+						log_It("info", "Legacy Permissions support will be going away in 1.5, please switch to a new permission system soon");
+						log_It("info", "PermissionsEX, bPermissions and bukkitPermissions are all good ones. Visit bukkit.org!");
+					}
 				} else {
 					log_It("info", "Legacy Permission system not detected!");
 					//ignorePermissions = true;
@@ -125,17 +137,13 @@ public class SpawnerAdjuster extends JavaPlugin {
 		}
 	
 	public static boolean permCheck(Player player, String perm) {
-		if (ignorePermissions) {
-			if(ignore_opsOnly) {
-				if(player.isOp()) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return true;
-			}
+		if(player.isOp()) {
+			return true;
 		}
+		if (ignorePermissions) {
+			return true;
+		}
+		
 		if(SuperPerms) {
 			if(player.hasPermission(perm)) {
 				return true;

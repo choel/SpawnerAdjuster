@@ -126,6 +126,18 @@ public class Config {
 			configYAML.set("spawner.allowBlaze", SpawnerAdjuster.allowBlaze); 
 		}
 		
+		if(configYAML.contains("spawner.allowOcelot")) {
+			SpawnerAdjuster.allowOcelot= configYAML.getBoolean("spawner.allowOcelot", false);
+		} else {
+			configYAML.set("spawner.allowOcelot", SpawnerAdjuster.allowOcelot); 
+		}
+		
+		if(configYAML.contains("spawner.allowIronGolem")) {
+			SpawnerAdjuster.allowIronGolem = configYAML.getBoolean("spawner.allowIronGolem", false);
+		} else {
+			configYAML.set("spawner.allowIronGolem", SpawnerAdjuster.allowIronGolem); 
+		}
+		
 		if(configYAML.contains("spawner.allowEnderDragon")) {
 			SpawnerAdjuster.allowEnderDragon = configYAML.getBoolean("spawner.allowEnderDragon", false);
 		} else {

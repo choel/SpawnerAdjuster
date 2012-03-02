@@ -1,6 +1,6 @@
 name: SpawnerAdjuster
 main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
-version: 1.3.0.A
+version: 1.4.0
 author: Choelian
 softdepend: [Permissions]
 permissions:
@@ -25,6 +25,7 @@ permissions:
         description: Allows players to set all NEUTRAL mob types on a monster spawner
         children:
             SpawnerAdjuster.SetMobs.Neutral.Pig: true
+            SpawnerAdjuster.SetMobs.Neutral.Ocelot: true
             SpawnerAdjuster.SetMobs.Neutral.Wolf: true
             SpawnerAdjuster.SetMobs.Neutral.Enderman: true
             SpawnerAdjuster.SetMobs.Neutral.Sheep: true
@@ -60,6 +61,7 @@ permissions:
         description: Allows players to set all Unsued mob types on a monster spawner
         children:
             SpawnerAdjuster.SetMobs.Utility.SnowGolem: true
+            SpawnerAdjuster.SetMobs.Utility.IronGolem: true
         default: true
     SpawnerAdjuster.SetMobs.Boss.*:
         description: Allows players to set all Unsued mob types on a monster spawner
@@ -117,11 +119,17 @@ permissions:
     SpawnerAdjuster.SetMobs.Neutral.Squid:
         description: Allows a player to set a Monster Spawner to spawn Squid which is a bad idea
         default: true
+    SpawnerAdjuster.SetMobs.Neutral.Ocelot:
+        description: Allows a player to set a Monster Spawner to spawn Ocelots
+        default: true
     SpawnerAdjuster.SetMobs.Boss.EnderDragon:
         description: Allows a player to set a Monster Spawner to spawn Ender Dragons
         default: true
     SpawnerAdjuster.SetMobs.Utility.SnowGolem:
         description: Allows a player to set a Monster Spawner to spawn Snow Golems
+        default: true
+    SpawnerAdjuster.SetMobs.Utility.IronGolem:
+        description: Allows a player to set a Monster Spawner to spawn Iron Golems
         default: true
     SpawnerAdjuster.SetMobs.Nether.Blaze:
         description: Allows a player to set a Monster Spawner to spawn Blazes
