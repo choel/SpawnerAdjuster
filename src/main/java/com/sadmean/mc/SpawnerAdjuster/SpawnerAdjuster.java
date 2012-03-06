@@ -104,9 +104,9 @@ public class SpawnerAdjuster extends JavaPlugin {
         setThisPlugin(this); //not 100% sure
         
         //initialize our arrays
-        creature_Store = new ArrayList();
-        spawner_Store = new ArrayList();
-        entries = new ArrayList();
+        creature_Store = new ArrayList<Creature>();
+        spawner_Store = new ArrayList<CreatureSpawner>();
+        entries = new ArrayList<Integer>();
     }
 	
     /**
