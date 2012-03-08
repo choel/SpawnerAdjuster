@@ -2,7 +2,6 @@ package com.sadmean.mc.SpawnerAdjuster;
 
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
-import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -10,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -130,9 +131,23 @@ public class AdjusterBlockListener implements Listener {
 		}
 	}
 	
+	/*
+	 * this wil not be used until 1.5 or 2.0
+	 * Catches CreatureSpawnEvents and checks to see if redstone is nearby. 
+	 * If redstone is near and it is unpowered, prevent the spawn.
+	 * 
+	 */
+	public void onCreatureSpawn(CreatureSpawnEvent event) {
+		if(event.getSpawnReason() == SpawnReason.SPAWNER) {
+			//if(event.getLocation().getBlock().ge) {
+				
+			//}
+		}
+	}
+	
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) {
-		//admin redstone thing here soon.
+		//admin redstone thing here (someday).
 	}
 	
 	private void forceSpawn(CreatureSpawner spawner) {
@@ -162,8 +177,7 @@ public class AdjusterBlockListener implements Listener {
 						}
 						reset = true;
 						/* anti-munson implement here */
-						Creature creature_cast = (Creature)spawnedEnt;
-						if(!SpawnerAdjuster.canSpawn(spawner, creature_cast)) {
+						if(!SpawnerAdjuster.canSpawn(spawner, spawnedEnt)) {
 							spawnedEnt.remove();
 						}
 						/* end anti munson implement */	

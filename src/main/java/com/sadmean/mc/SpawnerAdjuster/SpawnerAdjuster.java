@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.CreatureSpawner;
-import org.bukkit.entity.Creature;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -79,7 +79,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean allowOcelot = true;
 	public static boolean allowIronGolem = true;
 	//1.3
-	public static ArrayList<Creature> creature_Store;
+	public static ArrayList<LivingEntity> creature_Store;
 	public static ArrayList<CreatureSpawner> spawner_Store;
 	public static ArrayList<Integer> entries;
 	
@@ -104,7 +104,7 @@ public class SpawnerAdjuster extends JavaPlugin {
         setThisPlugin(this); //not 100% sure
         
         //initialize our arrays
-        creature_Store = new ArrayList<Creature>();
+        creature_Store = new ArrayList<LivingEntity>();
         spawner_Store = new ArrayList<CreatureSpawner>();
         entries = new ArrayList<Integer>();
     }
@@ -232,7 +232,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 		    public void run() {
 		    	//clear non-existant creatures out of storage
 		    	//int i = 0;
-		    	Iterator<Creature> iterator = creature_Store.iterator();
+		    	Iterator<LivingEntity> iterator = creature_Store.iterator();
 		    	while(iterator.hasNext()) {
 		    		if(iterator.next().isDead()) iterator.remove();
 		    	}
@@ -276,7 +276,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 		}
 	}
 	
-	public static boolean canSpawn(CreatureSpawner spawner, Creature ent) {
+	public static boolean canSpawn(CreatureSpawner spawner, LivingEntity ent) {
 		creature_Store.add(ent);
 		int point = 0;
 		if(spawner_Store.contains(spawner)) {
