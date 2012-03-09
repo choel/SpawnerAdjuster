@@ -46,11 +46,14 @@ public class Config {
 			configYAML.set("system.debugLogs", SpawnerAdjuster.debugLogs); 
 		}
 		
+		/** 
+		 * Legacy Permissions is no longer supported, ignorePermissions is now the only permission setting that matters.
 		if(configYAML.contains("system.SuperPerms")) {
 			SpawnerAdjuster.SuperPerms = configYAML.getBoolean("system.SuperPerms", true);
 		} else {
 			configYAML.set("system.SuperPerms", SpawnerAdjuster.SuperPerms); 
 		}
+		**/
 		
 		if(configYAML.contains("system.ignorePermissions")) {
 			SpawnerAdjuster.ignorePermissions = configYAML.getBoolean("system.ignorePermissions", true);
@@ -69,29 +72,37 @@ public class Config {
 		} else {
 			configYAML.set("system.mustHaveValidPermissionsToAlterSpawner", SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner); 
 		}
-		
-		if(configYAML.contains("system.maxNumberOfEntsNearSpawner")) {
-			SpawnerAdjuster.maxNumberOfEntsNearSpawner = configYAML.getInt("system.maxNumberOfEntsNearSpawner", 6);
-		} else {
-			configYAML.set("system.maxNumberOfEntsNearSpawner", SpawnerAdjuster.maxNumberOfEntsNearSpawner); 
-		}
-		
+				
 		if(configYAML.contains("system.TotalSpawnedEnts")) {
 			SpawnerAdjuster.TotalSpawnedEnts = configYAML.getInt("system.TotalSpawnedEnts", 50);
 		} else {
 			configYAML.set("system.TotalSpawnedEnts", SpawnerAdjuster.TotalSpawnedEnts); 
 		}
-		
-		if(configYAML.contains("system.spawnerEntCheckRadius")) {
-			SpawnerAdjuster.spawnerEntCheckRadius = configYAML.getInt("system.spawnerEntCheckRadius", 6);
-		} else {
-			configYAML.set("system.spawnerEntCheckRadius", SpawnerAdjuster.spawnerEntCheckRadius); 
-		}
-		
+				
 		if(configYAML.contains("system.redstoneForcesSpawn")) {
 			SpawnerAdjuster.redstoneForcesSpawn = configYAML.getBoolean("system.redstoneForcesSpawn", true);
 		} else {
 			configYAML.set("system.redstoneForcesSpawn", SpawnerAdjuster.redstoneForcesSpawn); 
+		}
+		
+		//radius check
+		
+		if(configYAML.contains("radiusCheck.useRadiusCheck")) {
+			SpawnerAdjuster.useRadiusCheck = configYAML.getBoolean("radiusCheck.useRadiusCheck", true);
+		} else {
+			configYAML.set("radiusCheck.useRadiusChecks", SpawnerAdjuster.useRadiusCheck); 
+		}
+		
+		if(configYAML.contains("radiusCheck.maxNumberOfEntsNearSpawner")) {
+			SpawnerAdjuster.maxNumberOfEntsNearSpawner = configYAML.getInt("radiusCheck.maxNumberOfEntsNearSpawner", 6);
+		} else {
+			configYAML.set("radiusCheck.maxNumberOfEntsNearSpawner", configYAML.getInt("system.maxNumberOfEntsNearSpawner", SpawnerAdjuster.maxNumberOfEntsNearSpawner)); 
+		}
+		
+		if(configYAML.contains("radiusCheck.distanceToCheck")) {
+			SpawnerAdjuster.spawnerEntCheckRadius = configYAML.getInt("radiusCheck.distanceToCheck", 6);
+		} else {
+			configYAML.set("radiusCheck.distanceToCheck", configYAML.getInt("system.spawnerEntCheckRadius", SpawnerAdjuster.spawnerEntCheckRadius)); 
 		}
 		
 		//Spawner settings
@@ -290,6 +301,9 @@ public class Config {
 		configYAML.set("system.useRedstoneListener", null);	
 		configYAML.set("system.usePlayerListener", null);	
 		configYAML.set("system.useRestoneListener", null);
+		configYAML.set("system.maxNumberOfEntsNearSpawner", null);
+		configYAML.set("system.spawnerEntCheckRadius", null);
+		configYAML.set("system.superPerms", null);
 		
 		try {
 			configYAML.save(SpawnerAdjuster.configFile);

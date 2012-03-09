@@ -172,7 +172,7 @@ public class AdjusterBlockListener implements Listener {
 						}
 						**/
 						numEntsofType = entList.size();
-						if(numEntsofType >= SpawnerAdjuster.maxNumberOfEntsNearSpawner) {
+						if(numEntsofType >= SpawnerAdjuster.maxNumberOfEntsNearSpawner && SpawnerAdjuster.useRadiusCheck) {
 							spawnedEnt.remove();
 						}
 						reset = true;

@@ -10,13 +10,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
+//import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.nijiko.permissions.PermissionHandler;
-import com.nijikokun.bukkit.Permissions.Permissions;
+//import com.nijiko.permissions.PermissionHandler;
+//import com.nijikokun.bukkit.Permissions.Permissions;
 import com.sadmean.mc.SpawnerAdjuster.Config.Config;
 
 public class SpawnerAdjuster extends JavaPlugin {
@@ -26,16 +26,16 @@ public class SpawnerAdjuster extends JavaPlugin {
 	private final AdjusterPlayerListener playerListener = new AdjusterPlayerListener(this); //the player listener.	
 	private final AdjusterBlockListener BlockListener = new AdjusterBlockListener(this); //the block listener.	
 	static public File configFile = new File(mainDirectory + File.separator + "config.yml"); //location of configfile. 
-	public static PermissionHandler permissionHandler; //permissions handler
-    private static SpawnerAdjuster thisPlugin = null; //I don't know what this does. Necessary for fancy log
+	//public static PermissionHandler permissionHandler; //permissions handler
+	private static SpawnerAdjuster thisPlugin = null; //I don't know what this does. Necessary for fancy log
 	public static Logger log = Logger.getLogger("Minecraft"); //logger object. can be written to directly with "log.info("herp derp")
-    public static String chatPrefix = ChatColor.DARK_AQUA + "[SA] " + ChatColor.GRAY;
-    private static PluginDescriptionFile thisYAML;
-    private static String pluginName, pluginVersion, fullName;
+	public static String chatPrefix = ChatColor.DARK_AQUA + "[SA] " + ChatColor.GRAY;
+	private static PluginDescriptionFile thisYAML;
+	private static String pluginName, pluginVersion, fullName;
 	//SETTINGS -to be loaded from config later
 	public static boolean ignorePermissions = true;
 	public static boolean debugLogs = false;
-	public static boolean SuperPerms = false;
+	public static boolean SuperPerms = true;
 	public static boolean usePlayerListener = true; //no longer changeable in config
 	public static boolean useRedstoneListener = true; //no longer changeable in config
 	public static boolean useBlockListener = true; //no longer changeable in config
@@ -88,6 +88,8 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static int spawnerEntCheckRadius = 6;
 	public static int TotalSpawnedEnts = 50;
 	
+	//1.5
+	public static boolean useRadiusCheck = true;
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 
@@ -111,8 +113,8 @@ public class SpawnerAdjuster extends JavaPlugin {
 	
     /**
      * legacy permissions support to be dropped in 1.5
-     * @deprecated
-     */
+     
+     
 	private void setupPermissions() {
 		Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
 			if (this.permissionHandler == null) {
@@ -135,6 +137,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 				}
 			}
 		}
+		*/
 	
 	public static boolean permCheck(Player player, String perm) {
 		if(player.isOp()) {
@@ -151,12 +154,15 @@ public class SpawnerAdjuster extends JavaPlugin {
 				return false;
 			}
 		} else {
+			/**
 			//legacy permissions support
 			if(permissionHandler.has(player, perm)) {
 				return true;
 			} else {
 				return false;
 			}
+			*/
+			return false;// should never hit this point
 		}
 		
 		
@@ -223,7 +229,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 			log_It("info", "Config file exists. Loading...");
 		}
 		Config.load(); ///AHHH REALLY? WRONG FUCKING ORDER
-		setupPermissions();
+		//setupPermissions();
 
 		
 		//set up repeating task to clean monster spawner arrays

@@ -1,8 +1,7 @@
 name: SpawnerAdjuster
 main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
-version: 1.4.1
+version: 1.5.0
 author: Choelian
-softdepend: [Permissions]
 permissions:
     SpawnerAdjuster.*:
         description: Gives access to all SpawnerAdjuster functions
