@@ -35,7 +35,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	//SETTINGS -to be loaded from config later
 	public static boolean ignorePermissions = true;
 	public static boolean debugLogs = false;
-	public static boolean SuperPerms = true;
+	public static boolean SuperPerms = true; //no longer changeable in config
 	public static boolean usePlayerListener = true; //no longer changeable in config
 	public static boolean useRedstoneListener = true; //no longer changeable in config
 	public static boolean useBlockListener = true; //no longer changeable in config
@@ -273,13 +273,11 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static void addToSpawner(CreatureSpawner spawner) {
 		if(!spawner_Store.contains(spawner)) {
 			spawner_Store.add(spawner);
-			entries.add(1);
-		} else {
-			int i =spawner_Store.indexOf(spawner); 
-			int setter = entries.get(i);
-			setter++;
-			entries.set(i, setter);
-		}
+		
+		}		
+		int i = spawner_Store.indexOf(spawner); 
+		entries.set(i, entries.get(i) + 1);
+		
 	}
 	
 	public static boolean canSpawn(CreatureSpawner spawner, LivingEntity ent) {

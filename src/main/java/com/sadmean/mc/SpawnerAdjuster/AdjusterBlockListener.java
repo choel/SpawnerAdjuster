@@ -139,9 +139,9 @@ public class AdjusterBlockListener implements Listener {
 	 */
 	public void onCreatureSpawn(CreatureSpawnEvent event) {
 		if(event.getSpawnReason() == SpawnReason.SPAWNER) {
-			//if(event.getLocation().getBlock().ge) {
-				
-			//}
+			if(SpawnerAdjuster.deactivedByRedstoneStatus) {
+				//asdf
+			}
 		}
 	}
 	
