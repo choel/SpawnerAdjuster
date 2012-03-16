@@ -23,9 +23,9 @@ public class Config {
 		}
 		
 		if(configYAML.contains("system.onlyOpsChangeSpawnType")) {
-			SpawnerAdjuster.opsChangeSpawnTypeOnly = configYAML.getBoolean("system.opsChangeSpawnTypeOnly", configYAML.getBoolean("system.usePlayerListener", false));
+			SpawnerAdjuster.opsChangeSpawnTypeOnly = configYAML.getBoolean("system.onlyOpsChangeSpawnType", false);
 		} else {
-			configYAML.set("system.opsChangeSpawnTypeOnly", SpawnerAdjuster.opsChangeSpawnTypeOnly); 
+			configYAML.set("system.onlyOpsChangeSpawnType", SpawnerAdjuster.opsChangeSpawnTypeOnly); 
 		}
 		
 		if(configYAML.contains("system.SpawnersRespondToRedstone")) {
@@ -304,6 +304,7 @@ public class Config {
 		configYAML.set("system.maxNumberOfEntsNearSpawner", null);
 		configYAML.set("system.spawnerEntCheckRadius", null);
 		configYAML.set("system.superPerms", null);
+		configYAML.set("opsChangeSpawnTypeOnly", null);
 		
 		try {
 			configYAML.save(SpawnerAdjuster.configFile);
