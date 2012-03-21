@@ -306,6 +306,10 @@ public class Config {
 		configYAML.set("system.superPerms", null);
 		configYAML.set("opsChangeSpawnTypeOnly", null);
 		
+		//these values are not currently used and should really just be hidden until I use them
+		configYAML.set("system.deactivedByRedstoneStatus", null);
+		configYAML.set("system.SpawnersRespondToRedstone", null);
+		
 		try {
 			configYAML.save(SpawnerAdjuster.configFile);
 		} catch (IOException e) {

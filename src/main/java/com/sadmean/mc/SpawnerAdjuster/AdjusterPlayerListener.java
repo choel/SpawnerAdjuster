@@ -19,7 +19,7 @@ public class AdjusterPlayerListener implements Listener {
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(event.getClickedBlock() == null || !SpawnerAdjuster.usePlayerListener) return;
 		if(event.getClickedBlock().getType() == Material.MOB_SPAWNER) {
-			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.ChangeSpawnType")) {
+			//if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.ChangeSpawnType")) {
 				if(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
 					CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
 					String name = spawner.getSpawnedType().getName();
@@ -35,7 +35,7 @@ public class AdjusterPlayerListener implements Listener {
 					event.setCancelled(true); //maybe prevent block placement?
 					spawner.setDelay(200);
 				}
-			}
+			//}
 		}
 	}
 	

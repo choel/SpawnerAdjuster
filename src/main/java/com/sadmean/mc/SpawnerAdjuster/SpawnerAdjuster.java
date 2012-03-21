@@ -49,7 +49,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean respondToRedstone = true;
 	public static boolean redstoneForcesSpawn = true;
 	//1.2
-	public static boolean deactivedByRedstoneStatus = false;
+	public static boolean deactivedByRedstoneStatus = false; //not currently used actually
 	public static boolean mustHaveValidPermissionsToAlterSpawner = false;
 	//mob settings
 	public static boolean allowChicken = true;
