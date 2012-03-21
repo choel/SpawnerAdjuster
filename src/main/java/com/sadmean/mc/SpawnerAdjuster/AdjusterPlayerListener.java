@@ -19,23 +19,22 @@ public class AdjusterPlayerListener implements Listener {
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(event.getClickedBlock() == null || !SpawnerAdjuster.usePlayerListener) return;
 		if(event.getClickedBlock().getType() == Material.MOB_SPAWNER) {
-			//if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.ChangeSpawnType")) {
-				if(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-					CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
-					String name = spawner.getSpawnedType().getName();
-					if(SpawnerAdjuster.opsChangeSpawnTypeOnly) {
-						if(event.getPlayer().isOp()) {
-							setSpawnType(spawner, event.getPlayer());
-						}
-					} else {
+			if(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+				CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
+				String name = spawner.getSpawnedType().getName();
+				if(SpawnerAdjuster.opsChangeSpawnTypeOnly) {
+					if(event.getPlayer().isOp()) {
 						setSpawnType(spawner, event.getPlayer());
 					}
-					String newName = spawner.getSpawnedType().getName();
-					event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + " is now: " + ChatColor.GREEN + newName);
-					event.setCancelled(true); //maybe prevent block placement?
-					spawner.setDelay(200);
+				} else {
+					setSpawnType(spawner, event.getPlayer());
 				}
-			//}
+				String newName = spawner.getSpawnedType().getName();
+				event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + " is now: " + ChatColor.GREEN + newName);
+				event.setCancelled(true); //maybe prevent block placement?
+				spawner.setDelay(200);
+			}
+			
 		}
 	}
 	

@@ -60,13 +60,13 @@ public class Config {
 		} else {
 			configYAML.set("system.ignorePermissions", SpawnerAdjuster.ignorePermissions); 
 		}
-		
+		/**
 		if(configYAML.contains("system.deactivedByRedstoneStatus")) {
 			SpawnerAdjuster.deactivedByRedstoneStatus = configYAML.getBoolean("system.deactivedByRedstoneStatus", false);
 		} else {
 			configYAML.set("system.deactivedByRedstoneStatus", SpawnerAdjuster.deactivedByRedstoneStatus); 
 		}
-		
+		**/
 		if(configYAML.contains("system.mustHaveValidPermissionsToAlterSpawner")) {
 			SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner = configYAML.getBoolean("system.mustHaveValidPermissionsToAlterSpawner", false);
 		} else {
@@ -308,7 +308,6 @@ public class Config {
 		
 		//these values are not currently used and should really just be hidden until I use them
 		configYAML.set("system.deactivedByRedstoneStatus", null);
-		configYAML.set("system.SpawnersRespondToRedstone", null);
 		
 		try {
 			configYAML.save(SpawnerAdjuster.configFile);

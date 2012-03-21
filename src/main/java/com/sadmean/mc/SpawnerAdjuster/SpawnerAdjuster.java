@@ -26,7 +26,6 @@ public class SpawnerAdjuster extends JavaPlugin {
 	private final AdjusterPlayerListener playerListener = new AdjusterPlayerListener(this); //the player listener.	
 	private final AdjusterBlockListener BlockListener = new AdjusterBlockListener(this); //the block listener.	
 	static public File configFile = new File(mainDirectory + File.separator + "config.yml"); //location of configfile. 
-	//public static PermissionHandler permissionHandler; //permissions handler
 	private static SpawnerAdjuster thisPlugin = null; //I don't know what this does. Necessary for fancy log
 	public static Logger log = Logger.getLogger("Minecraft"); //logger object. can be written to directly with "log.info("herp derp")
 	public static String chatPrefix = ChatColor.DARK_AQUA + "[SA] " + ChatColor.GRAY;
@@ -110,35 +109,7 @@ public class SpawnerAdjuster extends JavaPlugin {
         spawner_Store = new ArrayList<CreatureSpawner>();
         entries = new ArrayList<Integer>();
     }
-	
-    /**
-     * legacy permissions support to be dropped in 1.5
-     
-     
-	private void setupPermissions() {
-		Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
-			if (this.permissionHandler == null) {
-				if (permissionsPlugin != null) {
-					this.permissionHandler = ((Permissions) permissionsPlugin).getHandler();
-					if(ignorePermissions || SuperPerms) {
-						//Legacy permissions found, but we're not using them so lets just null it back out
-						this.permissionHandler = null;
-					} else {
-						log_It("info", "Legacy Permissions support will be going away in 1.5, please switch to a new permission system soon");
-						log_It("info", "PermissionsEX, bPermissions and bukkitPermissions are all good ones. Visit bukkit.org!");
-					}
-				} else {
-					log_It("info", "Legacy Permission system not detected!");
-					//ignorePermissions = true;
-					if(!SuperPerms) {
-						log_It("info", "SuperPermissions also not found. Your settings are probably incorrect.");
-						//ignorePermissions = true;
-					}
-				}
-			}
-		}
-		*/
-	
+		
 	public static boolean permCheck(Player player, String perm) {
 		if(player.isOp()) {
 			return true;
@@ -154,14 +125,6 @@ public class SpawnerAdjuster extends JavaPlugin {
 				return false;
 			}
 		} else {
-			/**
-			//legacy permissions support
-			if(permissionHandler.has(player, perm)) {
-				return true;
-			} else {
-				return false;
-			}
-			*/
 			return false;// should never hit this point
 		}
 		
@@ -229,7 +192,6 @@ public class SpawnerAdjuster extends JavaPlugin {
 			log_It("info", "Config file exists. Loading...");
 		}
 		Config.load(); ///AHHH REALLY? WRONG FUCKING ORDER
-		//setupPermissions();
 
 		
 		//set up repeating task to clean monster spawner arrays
@@ -242,20 +204,6 @@ public class SpawnerAdjuster extends JavaPlugin {
 		    	while(iterator.hasNext()) {
 		    		if(iterator.next().isDead()) iterator.remove();
 		    	}
-		    	//decrement ALL entries
-		    	/* disabed for now, may not actually need
-		    	int point = 0;
-		    	Iterator<Integer> itr = entries.iterator();
-		    	while(itr.hasNext()) {
-		    		if(itr.next() == 0) {
-		    			itr.remove();
-		    			spawner_Store.remove(point);
-		    		} else {
-		    			entries.set(point, itr.next() - 1);
-		    		}
-		    		point++;
-		    	}
-		        */
 		    }
 		}, 60L, 65L);
 		if(taskID < 0) {
