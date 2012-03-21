@@ -9,11 +9,6 @@
   		<artifactId>bukkit</artifactId>
   		<version>1.2.3-R0.2</version>
   	</dependency>
-  	<dependency>
-  		<groupId>com.nijikokun.bukkit</groupId>
-  		<artifactId>Permissions</artifactId>
-  		<version>3.1.6</version>
-  	</dependency>
   </dependencies>
   <properties>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
