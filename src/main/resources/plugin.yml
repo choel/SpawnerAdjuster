@@ -2,6 +2,17 @@ name: SpawnerAdjuster
 main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
 version: 1.5.0
 author: Choelian
+commands:
+    spawneradjusterreload:
+       description: Reloads SpawnerAdjuster config file.
+       usage: /spawneradjusterreload
+       permission: SpawnerAdjuster.Commands.SAReload
+       permission-message: You don't have proper permissions
+    spawneradjusterdebug:
+       description: Runs a debug check.
+       usage: /spawneradjusterdebug
+       permission: SpawnerAdjuster.Commands.SADebug
+       permission-message: You don't have proper permissions
 permissions:
     SpawnerAdjuster.*:
         description: Gives access to all SpawnerAdjuster functions
@@ -9,6 +20,13 @@ permissions:
             SpawnerAdjuster.SetMobs.*: true
             SpawnerAdjuster.BreakSpawners: true
             SpawnerAdjuster.DropSpawners: true
+            SpawnerAdjuster.Commands.*: true
+        default: true
+    SpawnerAdjuster.Commands.*:
+        description: Allows players to set all HOSTILE mob types on a monster spawner
+        children:
+            SpawnerAdjuster.Commands.SADebug: true
+            SpawnerAdjuster.Commands.SAReload: true
         default: true
     SpawnerAdjuster.SetMobs.*:
         description: Allows players to set all mob types on a monster spawner
@@ -66,6 +84,12 @@ permissions:
         description: Allows players to set all Unsued mob types on a monster spawner
         children:
             SpawnerAdjuster.SetMobs.Boss.EnderDragon: true
+        default: true
+    SpawnerAdjuster.Commands.SADebug:
+        description: Allows players to run a debug check
+        default: true
+    SpawnerAdjuster.Commands.SAReload
+        description: Allows players to reload the config file
         default: true
     SpawnerAdjuster.BreakSpawners:
         description: Allows players to break a monster spawner

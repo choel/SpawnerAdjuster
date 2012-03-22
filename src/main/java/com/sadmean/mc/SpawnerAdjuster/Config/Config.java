@@ -8,6 +8,7 @@ import com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster;
 
 public class Config {
 	public static boolean load() {
+		SpawnerAdjuster.log_It("info", "Loading config ...");
 		FileConfiguration configYAML = SpawnerAdjuster.getThisPlugin().getConfig();
 		try {
 			configYAML.load(SpawnerAdjuster.configFile);

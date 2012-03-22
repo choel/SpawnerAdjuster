@@ -18,6 +18,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 //import com.nijiko.permissions.PermissionHandler;
 //import com.nijikokun.bukkit.Permissions.Permissions;
 import com.sadmean.mc.SpawnerAdjuster.Config.Config;
+import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterreload;
+import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterdebug;
 
 public class SpawnerAdjuster extends JavaPlugin {
 
@@ -89,6 +91,8 @@ public class SpawnerAdjuster extends JavaPlugin {
 	
 	//1.5
 	public static boolean useRadiusCheck = true;
+	private spawneradjusterreload reloadExecutor;
+	private spawneradjusterdebug debugExecutor;
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 
@@ -188,18 +192,20 @@ public class SpawnerAdjuster extends JavaPlugin {
 	             ex.printStackTrace(); //not needed anymore probably
 	         }
 	 
-		} else { 
-			log_It("info", "Config file exists. Loading...");
-		}
+		} 
 		Config.load(); ///AHHH REALLY? WRONG FUCKING ORDER
 
+		//set up command executors.
+		reloadExecutor = new spawneradjusterreload(this);
+		getCommand("spawneradjusterreload").setExecutor(reloadExecutor);
+		debugExecutor = new spawneradjusterdebug(this);
+		getCommand("spawneradjusterreload").setExecutor(debugExecutor);
 		
 		//set up repeating task to clean monster spawner arrays
 		int taskID = getThisPlugin().getServer().getScheduler().scheduleSyncRepeatingTask(getThisPlugin(), new Runnable() {
 
 		    public void run() {
 		    	//clear non-existant creatures out of storage
-		    	//int i = 0;
 		    	Iterator<LivingEntity> iterator = creature_Store.iterator();
 		    	while(iterator.hasNext()) {
 		    		if(iterator.next().isDead()) iterator.remove();
