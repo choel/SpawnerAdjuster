@@ -18,6 +18,11 @@ public class spawneradjusterreload implements CommandExecutor{
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
+		if(!(sender instanceof Player)) {
+			SpawnerAdjuster.log_It("info", "reloading config ...");
+			Config.load();
+			return true;
+		}
 		Player senderPlayer = (Player) sender;
 		if(!cmd.getName().equalsIgnoreCase("spawneradjusterreload")) {
 			return false;
@@ -25,7 +30,7 @@ public class spawneradjusterreload implements CommandExecutor{
 		if(!senderPlayer.hasPermission("SpawnerAdjuster.Commands.SAReload") && !senderPlayer.isOp()) {
 			return false;
 		}
-		
+		senderPlayer.sendMessage(SpawnerAdjuster.chatPrefix + "reloading config ....");
 		Config.load();
 		
 		return true;

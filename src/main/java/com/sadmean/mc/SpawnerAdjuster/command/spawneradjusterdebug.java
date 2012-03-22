@@ -17,6 +17,10 @@ public class spawneradjusterdebug implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
+		if(!(sender instanceof Player)) {
+			SpawnerAdjuster.log_It("warning", "/spawneradjusterdebug cannot be done from the console");
+			return true;
+		}
 		Player senderplayer = (Player) sender;
 		if(!cmd.getName().equalsIgnoreCase("spawneradjusterdebug")) {
 			return false;
