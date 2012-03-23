@@ -199,7 +199,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 		reloadExecutor = new spawneradjusterreload(this);
 		getCommand("spawneradjusterreload").setExecutor(reloadExecutor);
 		debugExecutor = new spawneradjusterdebug(this);
-		getCommand("spawneradjusterreload").setExecutor(debugExecutor);
+		getCommand("spawneradjusterdebug").setExecutor(debugExecutor);
 		
 		//set up repeating task to clean monster spawner arrays
 		int taskID = getThisPlugin().getServer().getScheduler().scheduleSyncRepeatingTask(getThisPlugin(), new Runnable() {

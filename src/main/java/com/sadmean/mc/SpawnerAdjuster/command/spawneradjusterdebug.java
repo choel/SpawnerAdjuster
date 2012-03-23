@@ -23,12 +23,14 @@ public class spawneradjusterdebug implements CommandExecutor {
 		}
 		Player senderplayer = (Player) sender;
 		if(!cmd.getName().equalsIgnoreCase("spawneradjusterdebug")) {
+			sender.sendMessage("Major error");
 			return false;
 		}
 		if(!senderplayer.hasPermission("SpawnerAdjuster.Commands.SADebug")) {
 			if(senderplayer.isOp()) {
 				//don't worry abut it.
 			} else {
+				sender.sendMessage("permission error");
 				return false;
 			}
 		}

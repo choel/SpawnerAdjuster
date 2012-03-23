@@ -88,7 +88,7 @@ permissions:
     SpawnerAdjuster.Commands.SADebug:
         description: Allows players to run a debug check
         default: true
-    SpawnerAdjuster.Commands.SAReload
+    SpawnerAdjuster.Commands.SAReload:
         description: Allows players to reload the config file
         default: true
     SpawnerAdjuster.BreakSpawners:
