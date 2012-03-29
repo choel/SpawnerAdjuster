@@ -1,6 +1,6 @@
 name: SpawnerAdjuster
 main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
-version: 1.5.1_INTERNAL
+version: 1.5.1
 author: Choelian
 commands:
     spawneradjusterreload:

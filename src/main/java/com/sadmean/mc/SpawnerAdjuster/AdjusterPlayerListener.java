@@ -70,7 +70,7 @@ public class AdjusterPlayerListener implements Listener {
 			i = 6;
 		}
 		if (spawner.getSpawnedType() == EntityType.ENDERMAN) {
-			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostle.Enderman") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Enderman") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 7;
 		}
 		if (spawner.getSpawnedType() == EntityType.ENDER_DRAGON) {
@@ -137,6 +137,10 @@ public class AdjusterPlayerListener implements Listener {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Utility.IronGolem") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 23;
 		}
+		if (spawner.getSpawnedType() == EntityType.SQUID){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Squid") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 24;
+		}
 		//if i is still -1, then we have an unknown mob type. We should not play with that spawner
 		if(i == -1) {
 			SpawnerAdjuster.log_It("warning", "unkown mob type error");
@@ -147,7 +151,7 @@ public class AdjusterPlayerListener implements Listener {
 		//i--;
 		int b = 0;
 		while(i != initalvalue || b == 0) {
-			if(i >= 24) i = 0;
+			if(i >= 25) i = 0;
 
 			if(i == 0 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Spider") && SpawnerAdjuster.allowSpider) {
 				//spawner.setSpawnedType(EntityType.SPIDER);
@@ -174,7 +178,7 @@ public class AdjusterPlayerListener implements Listener {
 				spawner.setSpawnedType(EntityType.SLIME);
 				return;
 			}
-			if(i == 6 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Enderman") && SpawnerAdjuster.allowEnderman) {
+			if(i == 6 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Enderman") && SpawnerAdjuster.allowEnderman) {
 				spawner.setSpawnedType(EntityType.ENDERMAN);
 				return;
 			}
@@ -238,11 +242,15 @@ public class AdjusterPlayerListener implements Listener {
 				spawner.setSpawnedType(EntityType.OCELOT);
 				return;
 			}
-			if(i == 22 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.IronGolem") && SpawnerAdjuster.allowIronGolem) {
+			if(i == 22 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Utility.IronGolem") && SpawnerAdjuster.allowIronGolem) {
 				spawner.setSpawnedType(EntityType.IRON_GOLEM);
 				return;
 			}
-			if(i == 23 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.allowCaveSpider) {
+			if(i == 23 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Squid") && SpawnerAdjuster.allowSquid) {
+				spawner.setSpawnedType(EntityType.SQUID);
+				return;
+			}
+			if(i == 24 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.allowCaveSpider) {
 				spawner.setSpawnedType(EntityType.CAVE_SPIDER);
 				return;
 			}
