@@ -94,6 +94,9 @@ public class SpawnerAdjuster extends JavaPlugin {
 	private spawneradjusterreload reloadExecutor;
 	private spawneradjusterdebug debugExecutor;
 	
+	//1.5.1
+	public static boolean advanced_stopPigSpawns = false;
+	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 
     }

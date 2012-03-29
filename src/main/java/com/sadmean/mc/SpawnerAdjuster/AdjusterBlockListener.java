@@ -3,6 +3,7 @@ package com.sadmean.mc.SpawnerAdjuster;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -150,6 +151,11 @@ public class AdjusterBlockListener implements Listener {
 		//admin redstone thing here (someday).
 	}
 	
+	@EventHandler
+	public void stopPigSpawn(CreatureSpawnEvent event) {
+		if(event.getEntityType() == EntityType.PIG && event.getSpawnReason() == SpawnReason.SPAWNER && SpawnerAdjuster.advanced_stopPigSpawns) event.setCancelled(true);
+	}
+	
 	private void forceSpawn(CreatureSpawner spawner) {
 
 		int range = 1;
@@ -181,6 +187,10 @@ public class AdjusterBlockListener implements Listener {
 							spawnedEnt.remove();
 						}
 						/* end anti munson implement */	
+						/* prevent pig spawns if defined as such */
+						if(spawnedEnt.getType() == EntityType.PIG && SpawnerAdjuster.advanced_stopPigSpawns) {
+							spawnedEnt.remove();
+						}
 					}
 				}
 			}

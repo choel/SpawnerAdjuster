@@ -264,6 +264,13 @@ public class Config {
 			configYAML.set("spawner.allowGiant", SpawnerAdjuster.allowGiant); 
 		}
 		
+		//advanced settings
+		if(configYAML.contains("advanced.stopPigSpawns")) {
+			SpawnerAdjuster.advanced_stopPigSpawns = configYAML.getBoolean("advanced.stopPigSpawns", false);
+		} else {
+			configYAML.set("advanced.stopPigSpawns", false); 
+		}
+		
 		//ignorePermissions extended
 		if(SpawnerAdjuster.ignorePermissions) {
 			/** This stuff not yet ready (or needed)
