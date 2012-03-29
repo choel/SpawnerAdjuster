@@ -42,27 +42,27 @@ public class AdjusterPlayerListener implements Listener {
 		int i = -1;
 		
 		if (spawner.getSpawnedType() == EntityType.CAVE_SPIDER) {
-			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostle.CaveSpider") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 0;
 		}
 		if (spawner.getSpawnedType() == EntityType.SPIDER) {
-			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostle.Spider") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Spider") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 1;
 		}
 		if (spawner.getSpawnedType() == EntityType.CREEPER) {
-			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostle.Creeper") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;			i = 1;
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Creeper") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;			i = 1;
 			i = 2;
 		}
 		if (spawner.getSpawnedType() == EntityType.SILVERFISH) {
-			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostle.Silverfish") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Silverfish") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 3;
 		}
 		if (spawner.getSpawnedType() == EntityType.SKELETON) {
-			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostle.Skeleton") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Skeleton") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 4;
 		}
 		if (spawner.getSpawnedType() == EntityType.ZOMBIE) {
-			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostle.Zombie") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Zombie") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 5;
 		}
 		if (spawner.getSpawnedType() == EntityType.SLIME) {
