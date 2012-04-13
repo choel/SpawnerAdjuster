@@ -1,7 +1,8 @@
 name: SpawnerAdjuster
 main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
-version: 1.5.2
+version: 1.6.0 (vault_test_build)
 author: Choelian
+softdepend: [Vault]
 commands:
     spawneradjusterreload:
        description: Reloads SpawnerAdjuster config file.

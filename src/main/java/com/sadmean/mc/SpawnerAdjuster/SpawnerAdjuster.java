@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
+import net.milkbowl.vault.permission.Permission;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.LivingEntity;
@@ -13,10 +15,10 @@ import org.bukkit.entity.Player;
 //import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-//import com.nijiko.permissions.PermissionHandler;
-//import com.nijikokun.bukkit.Permissions.Permissions;
+
 import com.sadmean.mc.SpawnerAdjuster.Config.Config;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterreload;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterdebug;
@@ -96,6 +98,10 @@ public class SpawnerAdjuster extends JavaPlugin {
 	
 	//1.5.1
 	public static boolean advanced_stopPigSpawns = false;
+	//1.6.0
+	public static boolean useVault = false;
+	public static Permission perms = null;
+
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 
@@ -220,8 +226,24 @@ public class SpawnerAdjuster extends JavaPlugin {
 		} else {
 			log_It("info", "Creature storage array cleaning task set with ID: " + Integer.toString(taskID));
 		}
+		
+		//start vault lockon
+		if(useVault) {
+			if(getServer().getPluginManager().getPlugin("Vault") == null) {
+				log_It("warning", "Vault not detected, but vault lockon requested. OHHHH SHIT!");
+			}
+			if(setupVaultPermissions()) log_It("info", "Vault lockon complete");
+		}
+		
 		log_It("info", "Loading complete");
 	}
+	
+    private boolean setupVaultPermissions() {
+        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+        perms = rsp.getProvider();
+        return perms != null;
+    }
+
 	
 	public void onDisable() {
 		
@@ -237,6 +259,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 		
 	}
 	
+	//this method does not really belong here, lets remove in 1.7
 	public static boolean canSpawn(CreatureSpawner spawner, LivingEntity ent) {
 		creature_Store.add(ent);
 		int point = 0;

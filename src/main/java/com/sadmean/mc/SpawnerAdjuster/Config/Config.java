@@ -61,6 +61,12 @@ public class Config {
 		} else {
 			configYAML.set("system.ignorePermissions", SpawnerAdjuster.ignorePermissions); 
 		}
+		
+		if(configYAML.contains("system.useVault")) {
+			SpawnerAdjuster.useVault = configYAML.getBoolean("system.useVault", false);
+		} else {
+			configYAML.set("system.useVault", SpawnerAdjuster.useVault); 
+		}
 		/**
 		if(configYAML.contains("system.deactivedByRedstoneStatus")) {
 			SpawnerAdjuster.deactivedByRedstoneStatus = configYAML.getBoolean("system.deactivedByRedstoneStatus", false);
