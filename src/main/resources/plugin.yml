@@ -1,6 +1,6 @@
 name: SpawnerAdjuster
 main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
-version: 1.5.1.A
+version: 1.5.2
 author: Choelian
 commands:
     spawneradjusterreload:
@@ -17,152 +17,152 @@ permissions:
     SpawnerAdjuster.*:
         description: Gives access to all SpawnerAdjuster functions
         children:
-            SpawnerAdjuster.SetMobs.*: op
-            SpawnerAdjuster.BreakSpawners: op
-            SpawnerAdjuster.DropSpawners: op
-            SpawnerAdjuster.Commands.*: op
-        default: op
+            SpawnerAdjuster.SetMobs.*: false
+            SpawnerAdjuster.BreakSpawners: false
+            SpawnerAdjuster.DropSpawners: false
+            SpawnerAdjuster.Commands.*: false
+        default: false
     SpawnerAdjuster.Commands.*:
         description: Allows players to set all HOSTILE mob types on a monster spawner
         children:
-            SpawnerAdjuster.Commands.SADebug: op
-            SpawnerAdjuster.Commands.SAReload: op
-        default: op
+            SpawnerAdjuster.Commands.SADebug: false
+            SpawnerAdjuster.Commands.SAReload: false
+        default: false
     SpawnerAdjuster.SetMobs.*:
         description: Allows players to set all mob types on a monster spawner
         children:
-            SpawnerAdjuster.SetMobs.Neutral.*: op
-            SpawnerAdjuster.SetMobs.Nether.*: op
-            SpawnerAdjuster.SetMobs.Hostile.*: op
-            SpawnerAdjuster.SetMobs.Utility.*: op
-            SpawnerAdjuster.SetMobs.Boss.*: op
-            SpawnerAdjuster.SetMobs.Unused.*: op
-        default: op
+            SpawnerAdjuster.SetMobs.Neutral.*: false
+            SpawnerAdjuster.SetMobs.Nether.*: false
+            SpawnerAdjuster.SetMobs.Hostile.*: false
+            SpawnerAdjuster.SetMobs.Utility.*: false
+            SpawnerAdjuster.SetMobs.Boss.*: false
+            SpawnerAdjuster.SetMobs.Unused.*: false
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.*:
         description: Allows players to set all NEUTRAL mob types on a monster spawner
         children:
-            SpawnerAdjuster.SetMobs.Neutral.Pig: op
-            SpawnerAdjuster.SetMobs.Neutral.Ocelot: op
-            SpawnerAdjuster.SetMobs.Neutral.Wolf: op
-            SpawnerAdjuster.SetMobs.Neutral.Enderman: op
-            SpawnerAdjuster.SetMobs.Neutral.Sheep: op
-            SpawnerAdjuster.SetMobs.Neutral.Cow: op
-            SpawnerAdjuster.SetMobs.Neutral.Squid: op
-            SpawnerAdjuster.SetMobs.Neutral.Mooshroom: op
-            SpawnerAdjuster.SetMobs.Neutral.Villager: op
-        default: op
+            SpawnerAdjuster.SetMobs.Neutral.Pig: false
+            SpawnerAdjuster.SetMobs.Neutral.Ocelot: false
+            SpawnerAdjuster.SetMobs.Neutral.Wolf: false
+            SpawnerAdjuster.SetMobs.Neutral.Enderman: false
+            SpawnerAdjuster.SetMobs.Neutral.Sheep: false
+            SpawnerAdjuster.SetMobs.Neutral.Cow: false
+            SpawnerAdjuster.SetMobs.Neutral.Squid: false
+            SpawnerAdjuster.SetMobs.Neutral.Mooshroom: false
+            SpawnerAdjuster.SetMobs.Neutral.Villager: false
+        default: false
     SpawnerAdjuster.SetMobs.Hostile.*:
         description: Allows players to set all HOSTILE mob types on a monster spawner
         children:
-            SpawnerAdjuster.SetMobs.Hostile.Creeper: op
-            SpawnerAdjuster.SetMobs.Hostile.Spider: op
-            SpawnerAdjuster.SetMobs.Hostile.CaveSpider: op
-            SpawnerAdjuster.SetMobs.Hostile.Skeleton: op
-            SpawnerAdjuster.SetMobs.Hostile.Silverfish: op
-            SpawnerAdjuster.SetMobs.Hostile.Slime: op
-        default: op
+            SpawnerAdjuster.SetMobs.Hostile.Creeper: false
+            SpawnerAdjuster.SetMobs.Hostile.Spider: false
+            SpawnerAdjuster.SetMobs.Hostile.CaveSpider: false
+            SpawnerAdjuster.SetMobs.Hostile.Skeleton: false
+            SpawnerAdjuster.SetMobs.Hostile.Silverfish: false
+            SpawnerAdjuster.SetMobs.Hostile.Slime: false
+        default: false
     SpawnerAdjuster.SetMobs.Nether.*:
         description: Allows players to set all Nether mob types on a monster spawner
         children:
-            SpawnerAdjuster.SetMobs.Nether.Ghast: op
-            SpawnerAdjuster.SetMobs.Nether.PigZombie: op
-            SpawnerAdjuster.SetMobs.Nether.Blaze: op
-            SpawnerAdjuster.SetMobs.Nether.MagmaCube: op
-        default: op
+            SpawnerAdjuster.SetMobs.Nether.Ghast: false
+            SpawnerAdjuster.SetMobs.Nether.PigZombie: false
+            SpawnerAdjuster.SetMobs.Nether.Blaze: false
+            SpawnerAdjuster.SetMobs.Nether.MagmaCube: false
+        default: false
     SpawnerAdjuster.SetMobs.Unused.*:
         description: Allows players to set all Unsued mob types on a monster spawner
         children:
-            SpawnerAdjuster.SetMobs.Unused.Giant: op
-        default: op
+            SpawnerAdjuster.SetMobs.Unused.Giant: false
+        default: false
     SpawnerAdjuster.SetMobs.Utility.*:
         description: Allows players to set all Unsued mob types on a monster spawner
         children:
-            SpawnerAdjuster.SetMobs.Utility.SnowGolem: op
-            SpawnerAdjuster.SetMobs.Utility.IronGolem: op
-        default: op
+            SpawnerAdjuster.SetMobs.Utility.SnowGolem: false
+            SpawnerAdjuster.SetMobs.Utility.IronGolem: false
+        default: false
     SpawnerAdjuster.SetMobs.Boss.*:
         description: Allows players to set all Unsued mob types on a monster spawner
         children:
-            SpawnerAdjuster.SetMobs.Boss.EnderDragon: op
-        default: op
+            SpawnerAdjuster.SetMobs.Boss.EnderDragon: false
+        default: false
     SpawnerAdjuster.Commands.SADebug:
         description: Allows players to run a debug check
-        default: op
+        default: false
     SpawnerAdjuster.Commands.SAReload:
         description: Allows players to reload the config file
-        default: op
+        default: false
     SpawnerAdjuster.BreakSpawners:
         description: Allows players to break a monster spawner
-        default: op
+        default: false
     SpawnerAdjuster.DropSpawners:
         description: Allows players to break a monster spawner
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Unused.Giant:
         description: Allows players to set a Monster Spawner to spawn Giants
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Nether.Ghast:
         description: Allows a player to set a Monster Spawner to spawn Ghasts
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Nether.PigZombie:
         description: Allows a player to set a Monster Spawner to spawn Pig Zombie Man
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Hostile.Creeper:
         description: Allows a player to set a Monster Spawner to spawn Creepers
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Hostile.Spider:
         description: Allows a player to set a Monster Spawner to spawn Spiders
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Hostile.CaveSpider:
         description: oh my god I hate typing all this permissions stuff
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Hostile.Skeleton:
         description: Allows a player to set a Monster Spawner to spawn Skelebones
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Hostile.Silverfish:
         description: Allows a player to set a Monster Spawner to spawn Silverfish
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Hostile.Slime:
         description: Allows a player to set a Monster Spawner to spawn Slimes
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.Cow:
         description: Allows a player to set a Monster Spawner to spawn Cows
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.Sheep:
         description: Allows a player to set a Monster Spawner to spawn Sheep
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.Wolf:
         description: Allows a player to set a Monster Spawner to spawn Wolf
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.Enderman:
         description: Allows a player to set a Monster Spawner to spawn Endermen
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.Pig:
         description: allows a Monster Spawner to set a player to spawn Pigs
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.Squid:
         description: Allows a player to set a Monster Spawner to spawn Squid which is a bad idea
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.Ocelot:
         description: Allows a player to set a Monster Spawner to spawn Ocelots
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Boss.EnderDragon:
         description: Allows a player to set a Monster Spawner to spawn Ender Dragons
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Utility.SnowGolem:
         description: Allows a player to set a Monster Spawner to spawn Snow Golems
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Utility.IronGolem:
         description: Allows a player to set a Monster Spawner to spawn Iron Golems
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Nether.Blaze:
         description: Allows a player to set a Monster Spawner to spawn Blazes
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Nether.MagmaCube:
         description: Allows a player to set a Monster Spawner to spawn a Magma Cubes. The hell
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.Villager:
         description: Allows a player to set a Monster Spawner to spawn friends
-        default: op
+        default: false
     SpawnerAdjuster.SetMobs.Neutral.Mooshroom:
         description: Allows a player to set a Monster Spawner to spawn Mooshrooms
-        default: op
+        default: false

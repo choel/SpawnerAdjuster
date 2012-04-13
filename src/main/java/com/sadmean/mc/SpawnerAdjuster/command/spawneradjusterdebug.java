@@ -12,7 +12,7 @@ public class spawneradjusterdebug implements CommandExecutor {
 	private SpawnerAdjuster plugin;
 	
 	public spawneradjusterdebug(SpawnerAdjuster plugin) {
-		this.plugin = plugin;
+		this.setPlugin(plugin);
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -48,6 +48,15 @@ public class spawneradjusterdebug implements CommandExecutor {
 
 		}
 		return true;
+	}
+
+	//never used, removes annoying eclipse warning.
+	public void setPlugin(SpawnerAdjuster plugin) {
+		this.plugin = plugin;
+	}
+
+	public SpawnerAdjuster getPlugin() {
+		return plugin;
 	}
 
 }

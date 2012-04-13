@@ -133,7 +133,7 @@ public class AdjusterBlockListener implements Listener {
 	}
 	
 	/*
-	 * this wil not be used until 1.5 or 2.0
+	 * this wil not be used until 1.5 or 2.0 // Or never I guess wtf am I doing?
 	 * Catches CreatureSpawnEvents and checks to see if redstone is nearby. 
 	 * If redstone is near and it is unpowered, prevent the spawn.
 	 * 
