@@ -277,6 +277,12 @@ public class Config {
 			configYAML.set("advanced.stopPigSpawns", false); 
 		}
 		
+		if(configYAML.contains("advanced.requireExtraPermission")) {
+			SpawnerAdjuster.advanced_requireExtraPermission = configYAML.getBoolean("advanced.requireExtraPermission", false);
+		} else {
+			configYAML.set("advanced.requireExtraPermission", false); 
+		}
+		
 		//ignorePermissions extended
 		if(SpawnerAdjuster.ignorePermissions) {
 			/** This stuff not yet ready (or needed)

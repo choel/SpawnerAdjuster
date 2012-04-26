@@ -27,7 +27,15 @@ public class AdjusterPlayerListener implements Listener {
 						setSpawnType(spawner, event.getPlayer());
 					}
 				} else {
-					setSpawnType(spawner, event.getPlayer());
+					if(SpawnerAdjuster.advanced_requireExtraPermission) {
+						if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.ChangeSpawnType")) {
+							setSpawnType(spawner, event.getPlayer());
+						} else {
+							//get fat, cat!
+						}
+					} else {
+						setSpawnType(spawner, event.getPlayer());
+					}
 				}
 				String newName = spawner.getSpawnedType().getName();
 				event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + " is now: " + ChatColor.GREEN + newName);

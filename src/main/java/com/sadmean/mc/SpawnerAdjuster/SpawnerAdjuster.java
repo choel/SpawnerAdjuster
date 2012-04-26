@@ -101,6 +101,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	//1.6.0
 	public static boolean useVault = false;
 	public static Permission perms = null;
+	public static boolean advanced_requireExtraPermission = false;
 
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
