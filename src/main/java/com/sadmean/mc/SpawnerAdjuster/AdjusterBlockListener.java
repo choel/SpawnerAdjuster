@@ -126,7 +126,7 @@ public class AdjusterBlockListener implements Listener {
 				}
 			}
 			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.DropSpawners") && SpawnerAdjuster.allowDroppedSpawners) {
-				if(event.isCancelled() == false) {
+				if(!event.isCancelled()) {
 					short asdf = 1;
 					ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1, asdf, event.getBlock().getData());
 					event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), spawnerstack);
