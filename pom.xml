@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.sadmean.mc.SpawnerAdjuster</groupId>
   <artifactId>SpawnerAdjuster</artifactId>
-  <version>1.6</version>
+  <version>1.7</version>
   <dependencies>
   	<dependency>
   		<groupId>org.bukkit</groupId>

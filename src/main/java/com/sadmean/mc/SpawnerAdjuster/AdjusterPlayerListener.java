@@ -38,9 +38,15 @@ public class AdjusterPlayerListener implements Listener {
 					}
 				}
 				String newName = spawner.getSpawnedType().getName();
-				event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + " is now: " + ChatColor.GREEN + newName);
-				event.setCancelled(true); //maybe prevent block placement?
-				spawner.setDelay(200);
+				if(SpawnerAdjuster.advanced_hideMessageIfSpawnerUnchanged && name.equalsIgnoreCase(newName)) {
+					//messgae is hidden
+				} else {
+					//message is not hidden
+					event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + " is now: " + ChatColor.GREEN + newName);
+					event.setCancelled(true); //maybe prevent block placement?
+					spawner.setDelay(200);
+				}
+
 			}
 			
 		}

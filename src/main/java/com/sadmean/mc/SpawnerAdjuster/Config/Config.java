@@ -283,6 +283,12 @@ public class Config {
 			configYAML.set("advanced.requireExtraPermission", false); 
 		}
 		
+		if(configYAML.contains("advanced.hideMessageIfSpawnerUnchanged")) {
+			SpawnerAdjuster.advanced_hideMessageIfSpawnerUnchanged = configYAML.getBoolean("advanced.hideMessageIfSpawnerUnchanged", false);
+		} else {
+			configYAML.set("advanced.hideMessageIfSpawnerUnchanged", false); 
+		}
+		
 		//ignorePermissions extended
 		if(SpawnerAdjuster.ignorePermissions) {
 			/** This stuff not yet ready (or needed)
