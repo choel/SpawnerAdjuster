@@ -168,36 +168,41 @@ public class AdjusterBlockListener implements Listener {
 			for(int dy = -(range); dy <= range && !reset; dy++) {
 				for(int dz = -(range); dz <= range && !reset; dz++) {
 					if(spawner.getBlock().getRelative(dx, dy, dz).getType() == Material.AIR) {
-						LivingEntity spawnedEnt = spawner.getWorld().spawnCreature(spawner.getBlock().getRelative(dx, dy, dz).getLocation(), spawner.getSpawnedType());
-						List<Entity> entList = spawnedEnt.getNearbyEntities(SpawnerAdjuster.spawnerEntCheckRadius - 1, SpawnerAdjuster.spawnerEntCheckRadius - 1, SpawnerAdjuster.spawnerEntCheckRadius - 1);
-						///int i = 0; //index
-						int numEntsofType = 0; //number of matching ents
-						/** this check needs work. Next version!
-						while(i <= entList.size()) {
-							if(entList.get(i) instanceof LivingEntity) {
-								numEntsofType++;
+						try {
+							Entity spawnedEnt = spawner.getWorld().spawnCreature(spawner.getBlock().getRelative(dx, dy, dz).getLocation(), spawner.getSpawnedType());
+							List<Entity> entList = spawnedEnt.getNearbyEntities(SpawnerAdjuster.spawnerEntCheckRadius - 1, SpawnerAdjuster.spawnerEntCheckRadius - 1, SpawnerAdjuster.spawnerEntCheckRadius - 1);
+							
+							int numEntsofType = 0; //number of matching ents
+						
+							numEntsofType = entList.size();
+							if(numEntsofType >= SpawnerAdjuster.maxNumberOfEntsNearSpawner && SpawnerAdjuster.useRadiusCheck) {
+								spawnedEnt.remove();
 							}
-							i++;
-						}
-						**/
-						numEntsofType = entList.size();
-						if(numEntsofType >= SpawnerAdjuster.maxNumberOfEntsNearSpawner && SpawnerAdjuster.useRadiusCheck) {
-							spawnedEnt.remove();
-						}
-						reset = true;
-						/* anti-munson implement here */
-						if(!SpawnerAdjuster.canSpawn(spawner, spawnedEnt)) {
-							spawnedEnt.remove();
-						}
-						/* end anti munson implement */	
-						/* prevent pig spawns if defined as such */
-						if(spawnedEnt.getType() == EntityType.PIG && SpawnerAdjuster.advanced_stopPigSpawns) {
-							spawnedEnt.remove();
+							reset = true;
+							/* anti-munson implement here */
+							if(!SpawnerAdjuster.canSpawn(spawner, spawnedEnt)) {
+								spawnedEnt.remove();
+							}
+							/* end anti munson implement */	
+							/* prevent pig spawns if defined as such */
+							if(spawnedEnt.getType() == EntityType.PIG && SpawnerAdjuster.advanced_stopPigSpawns) {
+								spawnedEnt.remove();
+							}
+						} catch(IllegalArgumentException e) {
+							SpawnerAdjuster.log_It("severe", "IllegalArgumentException: Spawner at (" + spawner.getLocation().getX() + "," + spawner.getLocation().getY() + "," + spawner.getLocation().getZ() + ") set to " + spawner.getCreatureTypeName());
+							SpawnerAdjuster.log_It("severe", "data: " + spawner.getRawData());
+							SpawnerAdjuster.log_It("severe", "Please post this error to the SpawnerAdjuster page at BukkitDev");
+							SpawnerAdjuster.log_It("severe", "The Spawner will now be deleted");
+							spawner.setType(Material.AIR);
 						}
 					}
 				}
 			}
 		}
-		spawner.setDelay(600);
+		try{
+			spawner.setDelay(600);
+		} catch(Exception e) {
+			SpawnerAdjuster.log_It("warning", "tried to reset spawner delay, but failed, probably because of an unrelated IllegalArgumentException");
+		}
 	}
 }
