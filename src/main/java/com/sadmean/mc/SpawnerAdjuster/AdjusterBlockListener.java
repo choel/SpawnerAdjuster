@@ -4,12 +4,11 @@ import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
+//import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
@@ -149,11 +148,12 @@ public class AdjusterBlockListener implements Listener {
 		}
 	}
 	
+	/*commenting these out so we don't waste cpu time
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) {
 		//admin redstone thing here (someday).
 	}
-	
+	*/
 	@EventHandler
 	public void stopPigSpawn(CreatureSpawnEvent event) {
 		if(event.getEntityType() == EntityType.PIG && event.getSpawnReason() == SpawnReason.SPAWNER && SpawnerAdjuster.advanced_stopPigSpawns) event.setCancelled(true);
@@ -163,7 +163,6 @@ public class AdjusterBlockListener implements Listener {
 
 		int range = 1;
 		boolean reset = false;
-		//if(spawner.getCreatureType() == CreatureType.SKELETON)
 		for(int dx = -(range); dx <= range && !reset; dx++) {
 			for(int dy = -(range); dy <= range && !reset; dy++) {
 				for(int dz = -(range); dz <= range && !reset; dz++) {

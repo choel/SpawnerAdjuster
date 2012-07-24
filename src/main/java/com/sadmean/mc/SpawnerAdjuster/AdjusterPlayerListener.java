@@ -43,13 +43,15 @@ public class AdjusterPlayerListener implements Listener {
 				} else {
 					//message is not hidden
 					event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + ". Now set to: " + ChatColor.GREEN + newName);
-					event.setCancelled(true); //maybe prevent block placement?
 					spawner.setDelay(200);
 				}
 
+			} else {
+				if(event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR) {
+					//modify spawner settings, for MC1.3
+				}
 			}
-			
-		}
+		} 
 	}
 	
 	public static void setSpawnType(CreatureSpawner spawner, Player player) {
@@ -157,7 +159,7 @@ public class AdjusterPlayerListener implements Listener {
 		}
 		//if i is still -1, then we have an unknown mob type. We should not play with that spawner
 		if(i == -1) {
-			SpawnerAdjuster.log_It("warning", "unkown mob type error");
+			SpawnerAdjuster.log_It("warning", "Unkown mob type error from spawner at " + spawner.getLocation());
 			return;
 		}
 		
@@ -168,7 +170,6 @@ public class AdjusterPlayerListener implements Listener {
 			if(i >= 25) i = 0;
 
 			if(i == 0 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Spider") && SpawnerAdjuster.allowSpider) {
-				//spawner.setSpawnedType(EntityType.SPIDER);
 				spawner.setSpawnedType(EntityType.SPIDER);
 				return;
 			}

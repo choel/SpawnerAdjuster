@@ -11,7 +11,7 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.ChatColor;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
+//import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 //import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
