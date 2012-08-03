@@ -168,7 +168,7 @@ public class AdjusterBlockListener implements Listener {
 				for(int dz = -(range); dz <= range && !reset; dz++) {
 					if(spawner.getBlock().getRelative(dx, dy, dz).getType() == Material.AIR) {
 						try {
-							Entity spawnedEnt = spawner.getWorld().spawnCreature(spawner.getBlock().getRelative(dx, dy, dz).getLocation(), spawner.getSpawnedType());
+							Entity spawnedEnt = spawner.getWorld().spawnEntity(spawner.getBlock().getRelative(dx, dy, dz).getLocation(), spawner.getSpawnedType());
 							List<Entity> entList = spawnedEnt.getNearbyEntities(SpawnerAdjuster.spawnerEntCheckRadius - 1, SpawnerAdjuster.spawnerEntCheckRadius - 1, SpawnerAdjuster.spawnerEntCheckRadius - 1);
 							
 							int numEntsofType = 0; //number of matching ents

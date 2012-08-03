@@ -49,6 +49,8 @@ public class AdjusterPlayerListener implements Listener {
 			} else {
 				if(event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR) {
 					//modify spawner settings, for MC1.3
+					CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
+					
 				}
 			}
 		} 

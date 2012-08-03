@@ -86,17 +86,14 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static ArrayList<Entity> creature_Store;
 	public static ArrayList<CreatureSpawner> spawner_Store;
 	public static ArrayList<Integer> entries;
-	
 	//force spawn settings
 	public static int maxNumberOfEntsNearSpawner = 6;
 	public static int spawnerEntCheckRadius = 6;
 	public static int TotalSpawnedEnts = 50;
-	
 	//1.5
 	public static boolean useRadiusCheck = true;
 	private spawneradjusterreload reloadExecutor;
 	private spawneradjusterdebug debugExecutor;
-	
 	//1.5.1
 	public static boolean advanced_stopPigSpawns = false;
 	//1.6.0
