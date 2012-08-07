@@ -270,6 +270,37 @@ public class Config {
 			configYAML.set("spawner.allowGiant", SpawnerAdjuster.allowGiant); 
 		}
 		
+		//Entities
+		if(configYAML.contains("spawner.allowFireball")) {
+			SpawnerAdjuster.allowFireball = configYAML.getBoolean("spawner.allowFireball", false);
+		} else {
+			configYAML.set("spawner.allowFireball", SpawnerAdjuster.allowFireball); 
+		}
+		
+		if(configYAML.contains("spawner.allowBoat")) {
+			SpawnerAdjuster.allowBoat = configYAML.getBoolean("spawner.allowBoat", false);
+		} else {
+			configYAML.set("spawner.allowBoat", SpawnerAdjuster.allowBoat); 
+		}
+		
+		if(configYAML.contains("spawner.allowMinecart")) {
+			SpawnerAdjuster.allowMinecart = configYAML.getBoolean("spawner.allowMinecart", false);
+		} else {
+			configYAML.set("spawner.allowMinecart", SpawnerAdjuster.allowMinecart); 
+		}
+		
+		if(configYAML.contains("spawner.allowEgg")) {
+			SpawnerAdjuster.allowEgg = configYAML.getBoolean("spawner.allowEgg", false);
+		} else {
+			configYAML.set("spawner.allowEgg", SpawnerAdjuster.allowEgg); 
+		}
+		
+		if(configYAML.contains("spawner.allowArrow")) {
+			SpawnerAdjuster.allowArrow = configYAML.getBoolean("spawner.allowArrow", false);
+		} else {
+			configYAML.set("spawner.allowArrow", SpawnerAdjuster.allowArrow); 
+		}
+		
 		//advanced settings
 		if(configYAML.contains("advanced.stopPigSpawns")) {
 			SpawnerAdjuster.advanced_stopPigSpawns = configYAML.getBoolean("advanced.stopPigSpawns", false);

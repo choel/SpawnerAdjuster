@@ -38,6 +38,7 @@ permissions:
             SpawnerAdjuster.SetMobs.Utility.*: false
             SpawnerAdjuster.SetMobs.Boss.*: false
             SpawnerAdjuster.SetMobs.Unused.*: false
+            SpawnerAdjuster.SetMobs.Entity.*: false
         default: false
     SpawnerAdjuster.SetMobs.Neutral.*:
         description: Allows players to set all NEUTRAL mob types on a monster spawner
@@ -80,6 +81,15 @@ permissions:
         children:
             SpawnerAdjuster.SetMobs.Utility.SnowGolem: false
             SpawnerAdjuster.SetMobs.Utility.IronGolem: false
+        default: false
+    SpawnerAdjuster.SetMobs.Entity.*:
+        description: Allows players to set non-creature entity types on a monster spawner
+        children:
+            SpawnerAdjuster.SetMobs.Entity.Arrow: false
+            SpawnerAdjuster.SetMobs.Entity.Boat: false
+            SpawnerAdjuster.SetMobs.Entity.Fireball: false
+            SpawnerAdjuster.SetMobs.Entity.Minecart: false
+            SpawnerAdjuster.SetMobs.Entity.Egg: false
         default: false
     SpawnerAdjuster.SetMobs.Boss.*:
         description: Allows players to set all Unsued mob types on a monster spawner
@@ -166,4 +176,19 @@ permissions:
         default: false
     SpawnerAdjuster.SetMobs.Neutral.Mooshroom:
         description: Allows a player to set a Monster Spawner to spawn Mooshrooms
+        default: false
+    SpawnerAdjuster.SetMobs.Entity.Arrow:
+        description: Allows a player to set a Monster Spawner to spawn arrows
+        default: false
+    SpawnerAdjuster.SetMobs.Entity.Boat:
+        description: Allows a player to set a Monster Spawner to spawn boats
+        default: false
+    SpawnerAdjuster.SetMobs.Neutral.Minecart:
+        description: Allows a player to set a Monster Spawner to spawn Minecarts
+        default: false
+    SpawnerAdjuster.SetMobs.Neutral.Fireball:
+        description: Allows a player to set a Monster Spawner to spawn Fireballs
+        default: false
+    SpawnerAdjuster.SetMobs.Neutral.Egg:
+        description: Allows a player to set a Monster Spawner to spawn Eggs
         default: false

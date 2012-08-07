@@ -102,6 +102,12 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean advanced_requireExtraPermission = false;
 	//1.7.0
 	public static boolean advanced_hideMessageIfSpawnerUnchanged = false;
+	//1.8.0
+	public static boolean allowFireball = false;
+	public static boolean allowMinecart = false;
+	public static boolean allowEgg = false;
+	public static boolean allowBoat = false;
+	public static boolean allowArrow = false;
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 

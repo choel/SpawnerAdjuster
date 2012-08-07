@@ -51,6 +51,21 @@ public class AdjusterPlayerListener implements Listener {
 					//modify spawner settings, for MC1.3
 					CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
 					
+					//if creeper, charge and uncharge
+					if(spawner.getSpawnedType() == EntityType.CREEPER) {
+						//nothing yet
+					}
+					
+					//if villager, change robe color
+					if(spawner.getSpawnedType() == EntityType.VILLAGER) {
+						//nothing yet
+					}
+					
+					//if enderman, change holding block
+					if(spawner.getSpawnedType() == EntityType.ENDERMAN) {
+						//nothing yet
+					}
+
 				}
 			}
 		} 
@@ -159,6 +174,27 @@ public class AdjusterPlayerListener implements Listener {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Squid") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 24;
 		}
+		if (spawner.getSpawnedType() == EntityType.ARROW){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Arrow") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 25;
+		}
+		if (spawner.getSpawnedType() == EntityType.BOAT){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Boat") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 26;
+		}
+		if (spawner.getSpawnedType() == EntityType.EGG){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Egg") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 27;
+		}
+		if (spawner.getSpawnedType() == EntityType.MINECART){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Minecart") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 28;
+		}
+		if (spawner.getSpawnedType() == EntityType.FIREBALL){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Fireball") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 29;
+		}
+		
 		//if i is still -1, then we have an unknown mob type. We should not play with that spawner
 		if(i == -1) {
 			SpawnerAdjuster.log_It("warning", "Unkown mob type error from spawner at " + spawner.getLocation());
@@ -267,13 +303,33 @@ public class AdjusterPlayerListener implements Listener {
 				spawner.setSpawnedType(EntityType.SQUID);
 				return;
 			}
-			if(i == 24 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.allowCaveSpider) {
+			if(i == 24 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Arrow") && SpawnerAdjuster.allowArrow) {
+				spawner.setSpawnedType(EntityType.ARROW);
+				return;
+			}
+			if(i == 25 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Boat") && SpawnerAdjuster.allowBoat) {
+				spawner.setSpawnedType(EntityType.BOAT);
+				return;
+			}
+			if(i == 26 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Egg") && SpawnerAdjuster.allowEgg) {
+				spawner.setSpawnedType(EntityType.EGG);
+				return;
+			}
+			if(i == 27 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Minecart") && SpawnerAdjuster.allowMinecart) {
+				spawner.setSpawnedType(EntityType.MINECART);
+				return;
+			}
+			if(i == 28 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Fireball") && SpawnerAdjuster.allowFireball) {
+				spawner.setSpawnedType(EntityType.FIREBALL);
+				return;
+			}
+			if(i == 29 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.allowCaveSpider) {
 				spawner.setSpawnedType(EntityType.CAVE_SPIDER);
 				return;
 			}
 			b++;
 			i++;
-			if(b > 30) {
+			if(b > 35) {
 				//infinite loop protection.
 				return;
 			}
