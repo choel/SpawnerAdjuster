@@ -92,6 +92,12 @@ public class Config {
 			configYAML.set("system.redstoneForcesSpawn", SpawnerAdjuster.redstoneForcesSpawn); 
 		}
 		
+		if(configYAML.contains("system.spawnersCanDropExp")) {
+			SpawnerAdjuster.spawnersCanDropExp = configYAML.getBoolean("system.spawnersCanDropExp", true);
+		} else {
+			configYAML.set("system.spawnersCanDropExp", SpawnerAdjuster.spawnersCanDropExp); 
+		}
+		
 		//radius check
 		
 		if(configYAML.contains("radiusCheck.useRadiusCheck")) {

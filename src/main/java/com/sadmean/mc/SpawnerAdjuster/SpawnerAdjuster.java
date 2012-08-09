@@ -108,6 +108,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean allowEgg = false;
 	public static boolean allowBoat = false;
 	public static boolean allowArrow = false;
+	public static boolean spawnersCanDropExp = true;
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 

@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
 //import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,6 +16,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
+import java.util.Random;
 
 public class AdjusterBlockListener implements Listener {
 	public static SpawnerAdjuster plugin; public AdjusterBlockListener(SpawnerAdjuster instance) { 
@@ -126,16 +128,23 @@ public class AdjusterBlockListener implements Listener {
 			}
 			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.DropSpawners") && SpawnerAdjuster.allowDroppedSpawners) {
 				if(!event.isCancelled()) {
+					event.setCancelled(true);
+					event.getBlock().setType(Material.AIR);
 					short asdf = 1;
 					ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1, asdf, event.getBlock().getData());
 					event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), spawnerstack);
 				}	
 			}
+			if(SpawnerAdjuster.spawnersCanDropExp) {
+				Random rand = new Random();
+				ExperienceOrb orb = event.getBlock().getWorld().spawn(event.getBlock().getLocation(), ExperienceOrb.class);
+				orb.setExperience(rand.nextInt(28) + 18);
+			}
 		}
 	}
 	
 	/*
-	 * this wil not be used until 1.5 or 2.0 // Or never I guess wtf am I doing?
+	 * this wil not be used until 1.5 or 2.0 // Or never I guess wtf am I doing? //look I added more to this line
 	 * Catches CreatureSpawnEvents and checks to see if redstone is nearby. 
 	 * If redstone is near and it is unpowered, prevent the spawn.
 	 * 
