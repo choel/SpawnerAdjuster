@@ -368,6 +368,7 @@ public class Config {
 		configYAML.set("system.spawnerEntCheckRadius", null);
 		configYAML.set("system.superPerms", null);
 		configYAML.set("opsChangeSpawnTypeOnly", null);
+		configYAML.set("spawner.allowEndermen", null);
 		
 		//these values are not currently used and should really just be hidden until I use them
 		configYAML.set("system.deactivedByRedstoneStatus", null);
