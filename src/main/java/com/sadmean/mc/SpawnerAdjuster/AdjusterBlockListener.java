@@ -128,17 +128,14 @@ public class AdjusterBlockListener implements Listener {
 			}
 			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.DropSpawners") && SpawnerAdjuster.allowDroppedSpawners) {
 				if(!event.isCancelled()) {
-					event.setCancelled(true);
-					event.getBlock().setType(Material.AIR);
 					short asdf = 1;
 					ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1, asdf, event.getBlock().getData());
 					event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), spawnerstack);
+					
 				}	
 			}
-			if(SpawnerAdjuster.spawnersCanDropExp) {
-				Random rand = new Random();
-				ExperienceOrb orb = event.getBlock().getWorld().spawn(event.getBlock().getLocation(), ExperienceOrb.class);
-				orb.setExperience(rand.nextInt(28) + 18);
+			if(!SpawnerAdjuster.spawnersCanDropExp) {
+				event.setExpToDrop(0);
 			}
 		}
 	}
