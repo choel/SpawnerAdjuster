@@ -75,7 +75,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean allowPig = true;
 	//Minecraft 1.0.0
 	public static boolean allowBlaze = true;
-	public static boolean allowEnderDragon = true;
+	public static boolean allowEnderDragon = false;
 	public static boolean allowMagmaCube = true;
 	public static boolean allowMooshroom = true;
 	public static boolean allowVillager = true;
