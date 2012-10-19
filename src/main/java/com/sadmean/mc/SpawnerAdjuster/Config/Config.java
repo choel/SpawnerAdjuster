@@ -97,7 +97,7 @@ public class Config {
 		} else {
 			configYAML.set("system.spawnersCanDropExp", SpawnerAdjuster.spawnersCanDropExp); 
 		}
-		
+
 		//radius check
 		
 		if(configYAML.contains("radiusCheck.useRadiusCheck")) {
@@ -204,6 +204,12 @@ public class Config {
 			configYAML.set("spawner.allowPig", SpawnerAdjuster.allowPig); 
 		}
 		
+		if(configYAML.contains("spawner.allowBat")) {
+			SpawnerAdjuster.allowBat = configYAML.getBoolean("spawner.allowBat", true);
+		} else {
+			configYAML.set("spawner.allowBat", SpawnerAdjuster.allowBat); 
+		}
+		
 		if(configYAML.contains("spawner.allowEnderman")) {
 			SpawnerAdjuster.allowEnderman = configYAML.getBoolean("spawner.allowEnderman", true);
 		} else {
@@ -254,7 +260,31 @@ public class Config {
 			configYAML.set("spawner.allowSlime", SpawnerAdjuster.allowSlime); 
 		}
 		
+		if(configYAML.contains("spawner.allowWitch")) {
+			SpawnerAdjuster.allowWitch = configYAML.getBoolean("spawner.allowWitch", false);
+		} else {
+			configYAML.set("spawner.allowWitch", SpawnerAdjuster.allowWitch); 
+		}
+		
+		if(configYAML.contains("spawner.allowZombieVillager")) {
+			SpawnerAdjuster.allowZombieVillager = configYAML.getBoolean("spawner.allowZombieVillager", false);
+		} else {
+			configYAML.set("spawner.allowZombieVillager", SpawnerAdjuster.allowZombieVillager); 
+		}
+		
 		//NetherMobs
+		
+		if(configYAML.contains("spawner.allowWither")) {
+			SpawnerAdjuster.allowWither = configYAML.getBoolean("spawner.allowWither", true);
+		} else {
+			configYAML.set("spawner.allowWither", SpawnerAdjuster.allowWither); 
+		}
+		
+		if(configYAML.contains("spawner.allowWitherSkeleton")) {
+			SpawnerAdjuster.allowWitherSkeleton = configYAML.getBoolean("spawner.allowWitherSkeleton", true);
+		} else {
+			configYAML.set("spawner.allowWitherSkeleton", SpawnerAdjuster.allowWitherSkeleton); 
+		}
 		
 		if(configYAML.contains("spawner.allowGhast")) {
 			SpawnerAdjuster.allowGhast = configYAML.getBoolean("spawner.allowGhast", true);
@@ -318,6 +348,18 @@ public class Config {
 			SpawnerAdjuster.advanced_requireExtraPermission = configYAML.getBoolean("advanced.requireExtraPermission", false);
 		} else {
 			configYAML.set("advanced.requireExtraPermission", false); 
+		}
+		
+		if(configYAML.contains("advanced.isDebugMode")) {
+			SpawnerAdjuster.advanced_debugMode = configYAML.getBoolean("advanced.isDebugMode", false);
+		} else {
+			configYAML.set("advanced.isDebugMode", false); 
+		}
+		
+		if(configYAML.contains("advanced.needSilkTouchForSpawnerDrops")) {
+			SpawnerAdjuster.advanced_needSilkTouchForSpawnerDrops= configYAML.getBoolean("advanced.needSilkTouchForSpawnerDrops", false);
+		} else {
+			configYAML.set("advanced.needSilkTouchForSpawnerDrops", false); 
 		}
 		
 		if(configYAML.contains("advanced.hideMessageIfSpawnerUnchanged")) {

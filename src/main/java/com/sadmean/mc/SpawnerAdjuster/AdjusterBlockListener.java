@@ -2,6 +2,7 @@ package com.sadmean.mc.SpawnerAdjuster;
 
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -14,6 +15,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
+import java.util.Map;
 
 public class AdjusterBlockListener implements Listener {
 	public static SpawnerAdjuster plugin; public AdjusterBlockListener(SpawnerAdjuster instance) { 
@@ -127,7 +129,16 @@ public class AdjusterBlockListener implements Listener {
 				if(!event.isCancelled()) {
 					short asdf = 1;
 					ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1, asdf, event.getBlock().getData());
-					event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), spawnerstack);
+					if(SpawnerAdjuster.advanced_needSilkTouchForSpawnerDrops) {
+						Map<Enchantment, Integer> map = event.getPlayer().getItemInHand().getEnchantments();
+						if(map.containsKey(Enchantment.SILK_TOUCH)) {
+							if(map.get(Enchantment.SILK_TOUCH) > 0) {
+								event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), spawnerstack);
+							}
+						}
+					} else {
+						event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), spawnerstack);
+					}
 					
 				}	
 			}
@@ -204,7 +215,7 @@ public class AdjusterBlockListener implements Listener {
 		try{
 			spawner.setDelay(600);
 		} catch(Exception e) {
-			SpawnerAdjuster.log_It("warning", "tried to reset spawner delay, but failed, probably because of an unrelated IllegalArgumentException");
+			SpawnerAdjuster.log_It("warning", "tried to reset spawner delay, but failed, probably because of an UNRELATED IllegalArgumentException");
 		}
 	}
 }

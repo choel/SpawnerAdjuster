@@ -1,6 +1,6 @@
 name: SpawnerAdjuster
 main: com.sadmean.mc.SpawnerAdjuster.SpawnerAdjuster
-version: 1.8.1
+version: 1.9.0
 author: Choelian
 softdepend: [Vault]
 commands:
@@ -9,16 +9,23 @@ commands:
        usage: /spawneradjusterreload
        permission: SpawnerAdjuster.Commands.SAReload
        permission-message: You don't have proper permissions
+       aliases: sareload
     spawneradjusterdebug:
        description: Runs a debug check.
        usage: /spawneradjusterdebug
        permission: SpawnerAdjuster.Commands.SADebug
+       permission-message: You don't have proper permissions
+    spawneradjusterspawndata:
+       description: Collects and prints byte data of targeted spawner.
+       usage: /spawneradjusterspawndata
+       permission: SpawnerAdjuster.Commands.SASpawninfo
        permission-message: You don't have proper permissions
 permissions:
     SpawnerAdjuster.*:
         description: Gives access to all SpawnerAdjuster functions
         children:
             SpawnerAdjuster.SetMobs.*: false
+            SpawnerAdjuster.AlterMobs.*: false
             SpawnerAdjuster.BreakSpawners: false
             SpawnerAdjuster.DropSpawners: false
             SpawnerAdjuster.Commands.*: false
@@ -28,6 +35,7 @@ permissions:
         children:
             SpawnerAdjuster.Commands.SADebug: false
             SpawnerAdjuster.Commands.SAReload: false
+            SpawnerAdjuster.Commands.SASpawndata: false
         default: false
     SpawnerAdjuster.SetMobs.*:
         description: Allows players to set all mob types on a monster spawner
@@ -39,6 +47,11 @@ permissions:
             SpawnerAdjuster.SetMobs.Boss.*: false
             SpawnerAdjuster.SetMobs.Unused.*: false
             SpawnerAdjuster.SetMobs.Entity.*: false
+        default: false
+    SpawnerAdjuster.AlterMobs.*:
+        description: Allows players to change settings on all mob types on a monster spawner
+        children:
+            SpawnerAdjuster.AlterMobs.Creeper: false
         default: false
     SpawnerAdjuster.SetMobs.Neutral.*:
         description: Allows players to set all NEUTRAL mob types on a monster spawner
@@ -52,6 +65,7 @@ permissions:
             SpawnerAdjuster.SetMobs.Neutral.Squid: false
             SpawnerAdjuster.SetMobs.Neutral.Mooshroom: false
             SpawnerAdjuster.SetMobs.Neutral.Villager: false
+            SpawnerAdjuster.SetMobs.Neutral.Bat: false
         default: false
     SpawnerAdjuster.SetMobs.Hostile.*:
         description: Allows players to set all HOSTILE mob types on a monster spawner
@@ -62,6 +76,8 @@ permissions:
             SpawnerAdjuster.SetMobs.Hostile.Skeleton: false
             SpawnerAdjuster.SetMobs.Hostile.Silverfish: false
             SpawnerAdjuster.SetMobs.Hostile.Slime: false
+            SpawnerAdjuster.SetMobs.Hostile.Witch: false
+            SpawnerAdjuster.SetMobs.Hostile.ZombieVillager: false
         default: false
     SpawnerAdjuster.SetMobs.Nether.*:
         description: Allows players to set all Nether mob types on a monster spawner
@@ -70,6 +86,7 @@ permissions:
             SpawnerAdjuster.SetMobs.Nether.PigZombie: false
             SpawnerAdjuster.SetMobs.Nether.Blaze: false
             SpawnerAdjuster.SetMobs.Nether.MagmaCube: false
+            SpawnerAdjuster.SetMobs.Nether.WitherSkeleton: false
         default: false
     SpawnerAdjuster.SetMobs.Unused.*:
         description: Allows players to set all Unsued mob types on a monster spawner
@@ -95,12 +112,16 @@ permissions:
         description: Allows players to set all Unsued mob types on a monster spawner
         children:
             SpawnerAdjuster.SetMobs.Boss.EnderDragon: false
+            SpawnerAdjuster.SetMobs.Boss.Wither: false
         default: false
     SpawnerAdjuster.Commands.SADebug:
         description: Allows players to run a debug check
         default: false
     SpawnerAdjuster.Commands.SAReload:
         description: Allows players to reload the config file
+        default: false
+    SpawnerAdjuster.Commands.SASpawndata:
+        description: Allows a player to print byte data of spawner to console
         default: false
     SpawnerAdjuster.BreakSpawners:
         description: Allows players to break a monster spawner
@@ -116,6 +137,9 @@ permissions:
         default: false
     SpawnerAdjuster.SetMobs.Nether.PigZombie:
         description: Allows a player to set a Monster Spawner to spawn Pig Zombie Man
+        default: false
+    SpawnerAdjuster.SetMobs.Nether.WitherSkeleton:
+        description: Allows a player to set a Monster Spawner to spawn Wither Skeleton
         default: false
     SpawnerAdjuster.SetMobs.Hostile.Creeper:
         description: Allows a player to set a Monster Spawner to spawn Creepers
@@ -134,6 +158,12 @@ permissions:
         default: false
     SpawnerAdjuster.SetMobs.Hostile.Slime:
         description: Allows a player to set a Monster Spawner to spawn Slimes
+        default: false
+    SpawnerAdjuster.SetMobs.Hostile.Witch:
+        description: Allows a player to set a Monster Spawner to spawn a Witch
+        default: false
+    SpawnerAdjuster.SetMobs.Hostile.ZombieVillager:
+        description: Allows a player to set a Monster Spawner to spawn Zombie Villagers
         default: false
     SpawnerAdjuster.SetMobs.Neutral.Cow:
         description: Allows a player to set a Monster Spawner to spawn Cows
@@ -156,8 +186,14 @@ permissions:
     SpawnerAdjuster.SetMobs.Neutral.Ocelot:
         description: Allows a player to set a Monster Spawner to spawn Ocelots
         default: false
+    SpawnerAdjuster.SetMobs.Neutral.Bat:
+        description: Allows a player to set a Monster Spawner to spawn batss
+        default: false
     SpawnerAdjuster.SetMobs.Boss.EnderDragon:
         description: Allows a player to set a Monster Spawner to spawn Ender Dragons
+        default: false
+    SpawnerAdjuster.SetMobs.Boss.Wither:
+        description: Allows a player to set a Monster Spawner to spawn a Wither
         default: false
     SpawnerAdjuster.SetMobs.Utility.SnowGolem:
         description: Allows a player to set a Monster Spawner to spawn Snow Golems
@@ -191,4 +227,7 @@ permissions:
         default: false
     SpawnerAdjuster.SetMobs.Neutral.Egg:
         description: Allows a player to set a Monster Spawner to spawn Eggs
+        default: false
+    SpawnerAdjuster.AlterMobs.Creeper:
+        description: Allows a player to set a Monster Spawner to spawn Charged Creepers
         default: false

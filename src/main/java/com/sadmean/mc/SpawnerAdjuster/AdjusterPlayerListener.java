@@ -54,6 +54,7 @@ public class AdjusterPlayerListener implements Listener {
 					//if creeper, charge and uncharge
 					if(spawner.getSpawnedType() == EntityType.CREEPER) {
 						//nothing yet
+						//spawner.setRawData(arg0);
 					}
 					
 					//if villager, change robe color
@@ -194,7 +195,29 @@ public class AdjusterPlayerListener implements Listener {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Fireball") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 29;
 		}
-		
+		//1.4
+		/* Uncomment out when 1.4 comes out
+		if (spawner.getSpawnedType() == EntityType.WITHER){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Boss.Wither") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 30;
+		}
+		if (spawner.getSpawnedType() == EntityType.WITHERSKELETON){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Nether.WitherSkeleton") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 31;
+		}
+		if (spawner.getSpawnedType() == EntityType.WITCH){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Witch") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 32;
+		}
+		if (spawner.getSpawnedType() == EntityType.ZOMBIEVILLAGER){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.ZombieVillager") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 33;
+		}
+		if (spawner.getSpawnedType() == EntityType.BAT){
+			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Bat") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
+			i = 34;
+		}
+		*/
 		//if i is still -1, then we have an unknown mob type. We should not play with that spawner
 		if(i == -1) {
 			SpawnerAdjuster.log_It("warning", "Unkown mob type error from spawner at " + spawner.getLocation());
@@ -205,7 +228,7 @@ public class AdjusterPlayerListener implements Listener {
 		//i--;
 		int b = 0;
 		while(i != initalvalue || b == 0) {
-			if(i >= 25) i = 0;
+			if(i >= 35) i = 0;
 
 			if(i == 0 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Spider") && SpawnerAdjuster.allowSpider) {
 				spawner.setSpawnedType(EntityType.SPIDER);
@@ -323,13 +346,35 @@ public class AdjusterPlayerListener implements Listener {
 				spawner.setSpawnedType(EntityType.FIREBALL);
 				return;
 			}
-			if(i == 29 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.allowCaveSpider) {
+			/*uncomment when MC 1.4 comes out
+			if(i == 29 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Boss.Wither) && SpawnerAdjuster.allowWither) {
+				spawner.setSpawnedType(EntityType.WITHER);
+				return;
+			}
+			if(i == 30 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Nether.WitherSkeleton") && SpawnerAdjuster.allowWitherSkeleton) {
+				spawner.setSpawnedType(EntityType.WITHERSKELETON);
+				return;
+			}
+			if(i == 31 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Witch") && SpawnerAdjuster.allowWitch) {
+				spawner.setSpawnedType(EntityType.WITCH);
+				return;
+			}
+			if(i == 32 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.ZombieVillager") && SpawnerAdjuster.allowZombieVillager) {
+				spawner.setSpawnedType(EntityType.ZOMBIEVILLAGER);
+				return;
+			}
+			if(i == 33 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Bat") && SpawnerAdjuster.allowBat) {
+				spawner.setSpawnedType(EntityType.BAT);
+				return;
+			}
+			*/
+			if(i == 34 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.allowCaveSpider) {
 				spawner.setSpawnedType(EntityType.CAVE_SPIDER);
 				return;
 			}
 			b++;
 			i++;
-			if(b > 35) {
+			if(b > 40) { //This will probably need to go up in minecraft 1.5
 				//infinite loop protection.
 				return;
 			}

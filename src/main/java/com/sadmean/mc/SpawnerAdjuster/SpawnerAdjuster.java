@@ -23,6 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.sadmean.mc.SpawnerAdjuster.Config.Config;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterreload;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterdebug;
+import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterspawndata;
 
 public class SpawnerAdjuster extends JavaPlugin {
 
@@ -109,6 +110,16 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean allowBoat = false;
 	public static boolean allowArrow = false;
 	public static boolean spawnersCanDropExp = true;
+	//1.9.0
+	public static boolean allowBat = false;
+	public static boolean allowWitch = false;
+	public static boolean allowZombieVillager = false;
+	public static boolean allowWither = false;
+	public static boolean allowWitherSkeleton = false;
+	public static boolean allowMobMods = false;
+	public static boolean advanced_debugMode = false;
+	public static boolean advanced_needSilkTouchForSpawnerDrops = false;
+	private spawneradjusterspawndata dataExecutor; //for testing
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 
@@ -131,6 +142,7 @@ public class SpawnerAdjuster extends JavaPlugin {
     }
 		
 	public static boolean permCheck(Player player, String perm) {
+		if(advanced_debugMode) return true;
 		if(player.isOp()) {
 			return true;
 		}
@@ -210,12 +222,16 @@ public class SpawnerAdjuster extends JavaPlugin {
 	 
 		} 
 		Config.load(); ///AHHH REALLY? WRONG FUCKING ORDER
-
+		if(advanced_debugMode) {
+			log_It("warning", "Debug mode is turned on.");
+		}
 		//set up command executors.
 		reloadExecutor = new spawneradjusterreload(this);
 		getCommand("spawneradjusterreload").setExecutor(reloadExecutor);
 		debugExecutor = new spawneradjusterdebug(this);
 		getCommand("spawneradjusterdebug").setExecutor(debugExecutor);
+		dataExecutor = new spawneradjusterspawndata(this);
+		getCommand("spawneradjusterspawndata").setExecutor(dataExecutor);
 		
 		//set up repeating task to clean monster spawner arrays
 		int taskID = getThisPlugin().getServer().getScheduler().scheduleSyncRepeatingTask(getThisPlugin(), new Runnable() {
