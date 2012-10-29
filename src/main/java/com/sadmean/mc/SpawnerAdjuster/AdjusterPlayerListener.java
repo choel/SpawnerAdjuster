@@ -191,33 +191,37 @@ public class AdjusterPlayerListener implements Listener {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Minecart") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 28;
 		}
-		if (spawner.getSpawnedType() == EntityType.FIREBALL){
+		if (spawner.getSpawnedType() == EntityType.LARGE_FIREBALL){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Fireball") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 29;
 		}
 		//1.4
-		/* Uncomment out when 1.4 comes out
+		
 		if (spawner.getSpawnedType() == EntityType.WITHER){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Boss.Wither") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 30;
 		}
+		/*
 		if (spawner.getSpawnedType() == EntityType.WITHERSKELETON){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Nether.WitherSkeleton") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 31;
 		}
+		*/
 		if (spawner.getSpawnedType() == EntityType.WITCH){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Witch") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 32;
 		}
+		/*
 		if (spawner.getSpawnedType() == EntityType.ZOMBIEVILLAGER){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.ZombieVillager") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 33;
 		}
+		*/
 		if (spawner.getSpawnedType() == EntityType.BAT){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Bat") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 34;
 		}
-		*/
+		
 		//if i is still -1, then we have an unknown mob type. We should not play with that spawner
 		if(i == -1) {
 			SpawnerAdjuster.log_It("warning", "Unkown mob type error from spawner at " + spawner.getLocation());
@@ -343,31 +347,33 @@ public class AdjusterPlayerListener implements Listener {
 				return;
 			}
 			if(i == 28 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Fireball") && SpawnerAdjuster.allowFireball) {
-				spawner.setSpawnedType(EntityType.FIREBALL);
+				spawner.setSpawnedType(EntityType.LARGE_FIREBALL);
 				return;
 			}
-			/*uncomment when MC 1.4 comes out
-			if(i == 29 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Boss.Wither) && SpawnerAdjuster.allowWither) {
+			if(i == 29 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Boss.Wither") && SpawnerAdjuster.allowWither) {
 				spawner.setSpawnedType(EntityType.WITHER);
 				return;
 			}
+			/*
 			if(i == 30 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Nether.WitherSkeleton") && SpawnerAdjuster.allowWitherSkeleton) {
 				spawner.setSpawnedType(EntityType.WITHERSKELETON);
 				return;
 			}
+			*/
 			if(i == 31 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Witch") && SpawnerAdjuster.allowWitch) {
 				spawner.setSpawnedType(EntityType.WITCH);
 				return;
 			}
+			/*
 			if(i == 32 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.ZombieVillager") && SpawnerAdjuster.allowZombieVillager) {
 				spawner.setSpawnedType(EntityType.ZOMBIEVILLAGER);
 				return;
 			}
+			*/
 			if(i == 33 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Bat") && SpawnerAdjuster.allowBat) {
 				spawner.setSpawnedType(EntityType.BAT);
 				return;
 			}
-			*/
 			if(i == 34 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.allowCaveSpider) {
 				spawner.setSpawnedType(EntityType.CAVE_SPIDER);
 				return;
