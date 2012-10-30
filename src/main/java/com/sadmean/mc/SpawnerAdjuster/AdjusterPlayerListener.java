@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 
 public class AdjusterPlayerListener implements Listener {
 	public static SpawnerAdjuster plugin; public AdjusterPlayerListener(SpawnerAdjuster instance) { 
@@ -52,9 +53,14 @@ public class AdjusterPlayerListener implements Listener {
 					CreatureSpawner spawner = (CreatureSpawner) event.getClickedBlock().getState();
 					
 					//if creeper, charge and uncharge
-					if(spawner.getSpawnedType() == EntityType.CREEPER) {
-						//nothing yet
-						//spawner.setRawData(arg0);
+					if(spawner.getSpawnedType() == EntityType.CREEPER && SpawnerAdjuster.advanced_debugMode) {
+						if(spawner.hasMetadata("CreeperMod")) {
+							event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Charged Creeper spawning disabled");
+							spawner.removeMetadata("CreeperMod", SpawnerAdjuster.getThisPlugin());
+						} else {
+							spawner.setMetadata("CreeperMod", new FixedMetadataValue(SpawnerAdjuster.getThisPlugin(), true));
+							event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Charged Creeper spawning enabled");
+						}
 					}
 					
 					//if villager, change robe color
@@ -338,10 +344,12 @@ public class AdjusterPlayerListener implements Listener {
 				spawner.setSpawnedType(EntityType.BOAT);
 				return;
 			}
+			/*
 			if(i == 26 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Egg") && SpawnerAdjuster.allowEgg) {
 				spawner.setSpawnedType(EntityType.EGG);
 				return;
 			}
+			*/
 			if(i == 27 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Minecart") && SpawnerAdjuster.allowMinecart) {
 				spawner.setSpawnedType(EntityType.MINECART);
 				return;

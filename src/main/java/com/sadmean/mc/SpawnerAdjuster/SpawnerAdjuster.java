@@ -14,6 +14,7 @@ import org.bukkit.entity.Entity;
 //import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 //import org.bukkit.plugin.Plugin;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -119,6 +120,8 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean allowMobMods = false;
 	public static boolean advanced_debugMode = false;
 	public static boolean advanced_needSilkTouchForSpawnerDrops = false;
+	public static boolean advanced_useOldTrackingSystem = false;
+	public static int entsPerSpawner = 10;
 	private spawneradjusterspawndata dataExecutor; //for testing
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
@@ -284,15 +287,26 @@ public class SpawnerAdjuster extends JavaPlugin {
 	
 	//this method does not really belong here, lets remove in 1.7
 	public static boolean canSpawn(CreatureSpawner spawner, Entity ent) {
-		creature_Store.add(ent);
-		int point = 0;
-		if(spawner_Store.contains(spawner)) {
-			point = spawner_Store.indexOf(spawner);
-			if(entries.get(point) >= 10 || creature_Store.size() > TotalSpawnedEnts) {
+		if(advanced_useOldTrackingSystem) {
+			creature_Store.add(ent);
+			int point = 0;
+			if(spawner_Store.contains(spawner)) {
+				point = spawner_Store.indexOf(spawner);
+				if(entries.get(point) >= entsPerSpawner || creature_Store.size() > TotalSpawnedEnts) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			creature_Store.add(ent);
+			int spawnedEnts = spawner.getMetadata("TotalSpawnedEnts").get(0).asInt();
+			if(spawnedEnts >= entsPerSpawner || creature_Store.size() > TotalSpawnedEnts) {
 				return false;
+			} else {
+				spawner.setMetadata("spawnedEnts", new FixedMetadataValue(getThisPlugin(), spawnedEnts + 1));
+				spawner.getMetadata("spawnedEnts").get(0).invalidate();
+				return true;
 			}
 		}
-		return true;
-	}
-
+	} 
 }

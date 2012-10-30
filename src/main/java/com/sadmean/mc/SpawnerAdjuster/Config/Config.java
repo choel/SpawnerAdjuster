@@ -368,6 +368,12 @@ public class Config {
 			configYAML.set("advanced.hideMessageIfSpawnerUnchanged", false); 
 		}
 		
+		if(configYAML.contains("advanced.useOldTrackingSystem")) {
+			SpawnerAdjuster.advanced_useOldTrackingSystem = configYAML.getBoolean("advanced.useOldTrackingSystem", false);
+		} else {
+			configYAML.set("advanced.useOldTrackingSystem", false); 
+		}
+		
 		//ignorePermissions extended
 		if(SpawnerAdjuster.ignorePermissions) {
 			/** This stuff not yet ready (or needed)
