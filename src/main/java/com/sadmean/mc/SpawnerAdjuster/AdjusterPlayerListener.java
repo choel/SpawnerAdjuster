@@ -197,7 +197,7 @@ public class AdjusterPlayerListener implements Listener {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Minecart") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 28;
 		}
-		if (spawner.getSpawnedType() == EntityType.LARGE_FIREBALL){
+		if (spawner.getSpawnedType() == EntityType.FIREBALL){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Fireball") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 29;
 		}
@@ -355,7 +355,7 @@ public class AdjusterPlayerListener implements Listener {
 				return;
 			}
 			if(i == 28 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Fireball") && SpawnerAdjuster.allowFireball) {
-				spawner.setSpawnedType(EntityType.LARGE_FIREBALL);
+				spawner.setSpawnedType(EntityType.FIREBALL);
 				return;
 			}
 			if(i == 29 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Boss.Wither") && SpawnerAdjuster.allowWither) {
