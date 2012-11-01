@@ -223,7 +223,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 		new File(mainDirectory).mkdir();  //makes our directory if needed
 		if(!configFile.exists()){ //if your config does not exist then ...
 	         try {
-	        	log_It("info", "No config defected. Attempting to create...");
+	        	log_It("info", "No config detected. Attempting to create...");
 	        	configFile.createNewFile(); //... we create it then ...
 	         } catch (IOException ex) { 
 	             ex.printStackTrace(); //not needed anymore probably
