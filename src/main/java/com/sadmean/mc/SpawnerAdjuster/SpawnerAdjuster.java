@@ -22,6 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 import com.sadmean.mc.SpawnerAdjuster.Config.Config;
+import com.sadmean.mc.SpawnerAdjuster.Config.MetaData;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterreload;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterdebug;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterspawndata;
@@ -33,7 +34,8 @@ public class SpawnerAdjuster extends JavaPlugin {
 	static String mainDirectory = "plugins/SpawnerAdjuster"; //plugin directory
 	private final AdjusterPlayerListener playerListener = new AdjusterPlayerListener(this); //the player listener.	
 	private final AdjusterBlockListener BlockListener = new AdjusterBlockListener(this); //the block listener.	
-	static public File configFile = new File(mainDirectory + File.separator + "config.yml"); //location of configfile. 
+	static public File configFile = new File(mainDirectory + File.separator + "config.yml"); //location of configfile.
+	static public File metadataFile = new File(mainDirectory + File.separator + "metadata.yml");
 	private static SpawnerAdjuster thisPlugin = null; //I don't know what this does. Necessary for fancy log
 	public static Logger log = Logger.getLogger("Minecraft"); //logger object. can be written to directly with "log.info("herp derp")
 	public static String chatPrefix = ChatColor.DARK_AQUA + "[SA] " + ChatColor.GRAY;
@@ -125,6 +127,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static boolean advanced_useOldTrackingSystem = false;
 	public static int entsPerSpawner = 10;
 	private spawneradjusterspawndata dataExecutor; //for testing
+	public static boolean advanced_storeMetadata = true;
 	
     public static SpawnerAdjuster getThisPlugin() { //I do not know. Needed for fancy log
         return thisPlugin; 
@@ -231,6 +234,21 @@ public class SpawnerAdjuster extends JavaPlugin {
 		if(advanced_debugMode) {
 			log_It("warning", "Debug mode is turned on.");
 		}
+		if(advanced_storeMetadata) {
+			if(!metadataFile.exists()) {
+				try {
+					log_It("info", "No metadata file detected. Attempting to create...");
+					metadataFile.createNewFile(); 
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			}
+			getThisPlugin().getServer().getScheduler().scheduleSyncDelayedTask(getThisPlugin(),new Runnable() {
+				public void run() {
+					MetaData.load();
+				}
+			}, 60L);
+		}
 		//set up command executors.
 		reloadExecutor = new spawneradjusterreload(this);
 		getCommand("spawneradjusterreload").setExecutor(reloadExecutor);
@@ -275,7 +293,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 
 	
 	public void onDisable() {
-		
+		//dump metadata
 	}
 	
 	public static void addToSpawner(CreatureSpawner spawner) {
