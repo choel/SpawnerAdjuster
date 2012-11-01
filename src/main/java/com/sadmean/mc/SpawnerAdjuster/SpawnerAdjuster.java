@@ -25,6 +25,7 @@ import com.sadmean.mc.SpawnerAdjuster.Config.Config;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterreload;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterdebug;
 import com.sadmean.mc.SpawnerAdjuster.command.spawneradjusterspawndata;
+import com.sadmean.mc.SpawnerAdjuster.spawningEvents.CreeperListener;
 
 public class SpawnerAdjuster extends JavaPlugin {
 
@@ -38,6 +39,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 	public static String chatPrefix = ChatColor.DARK_AQUA + "[SA] " + ChatColor.GRAY;
 	private static PluginDescriptionFile thisYAML;
 	private static String pluginName, pluginVersion, fullName;
+	private final CreeperListener creeperListener = new CreeperListener();
 	//SETTINGS -to be loaded from config later
 	public static boolean ignorePermissions = true;
 	public static boolean debugLogs = false;
@@ -214,6 +216,7 @@ public class SpawnerAdjuster extends JavaPlugin {
 		PluginManager pm = this.getServer().getPluginManager(); //register this plugin
 		if(usePlayerListener) pm.registerEvents(playerListener, this); //register our playerListener
 		if(useBlockListener || useRedstoneListener) pm.registerEvents(BlockListener, this);
+		if(advanced_debugMode) pm.registerEvents(creeperListener, this);
 		new File(mainDirectory).mkdir();  //makes our directory if needed
 		if(!configFile.exists()){ //if your config does not exist then ...
 	         try {
