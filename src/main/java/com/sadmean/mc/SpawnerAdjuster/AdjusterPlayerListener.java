@@ -44,7 +44,8 @@ public class AdjusterPlayerListener implements Listener {
 				} else {
 					//message is not hidden
 					event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + ". Now set to: " + ChatColor.GREEN + newName);
-					spawner.setDelay(200);
+					spawner.setDelay(200); //reset delay
+					spawner.removeMetadata("sub_type", SpawnerAdjuster.getThisPlugin()); //remove meta data
 				}
 
 			} else {
@@ -72,19 +73,24 @@ public class AdjusterPlayerListener implements Listener {
 					if(spawner.getSpawnedType() == EntityType.ENDERMAN) {
 						//nothing yet
 					}
-
+					
+					if(spawner.getSpawnedType() == EntityType.SKELETON) {
+						if(spawner.hasMetadata("sub_type")) {
+							if(spawner.getMetadata("subType").get(0).asString().equalsIgnoreCase("none")) {
+								spawner.setMetadata("sub_type", new FixedMetadataValue(SpawnerAdjuster.getThisPlugin(), "wither"));
+							} else {
+								spawner.setMetadata("sub_type", new FixedMetadataValue(SpawnerAdjuster.getThisPlugin(), "none"));
+							}
+						}
+						event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Skeleton Subtype set to" + ChatColor.RED + " " + spawner.getMetadata("sub_type").get(0).asString());
+					}
 				}
 			}
 		} 
 	}
 	
 	public static void setSpawnType(CreatureSpawner spawner, Player player) {
-		int i = -1;
-		String sub_type = "none";
-		
-		if(spawner.hasMetadata("sub_type")) {
-			sub_type = spawner.getMetadata("sub_type").get(0).asString();
-		}
+		int i = -1;;
 		
 		if (spawner.getSpawnedType() == EntityType.CAVE_SPIDER) {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.CaveSpider") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
@@ -102,7 +108,7 @@ public class AdjusterPlayerListener implements Listener {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Silverfish") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 3;
 		}
-		if (spawner.getSpawnedType() == EntityType.SKELETON && sub_type.equals("none")) {
+		if (spawner.getSpawnedType() == EntityType.SKELETON) {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Skeleton") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 4;
 		}
@@ -211,15 +217,17 @@ public class AdjusterPlayerListener implements Listener {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Boss.Wither") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 30;
 		}
-		if (spawner.getSpawnedType() == EntityType.SKELETON && sub_type.equals("wither")){
+		/* Wither Skeleton doesn't exist
+		if (spawner.getSpawnedType() == EntityType.WITHERSKELETON){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Nether.WitherSkeleton") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 31;
 		}
+		*/
 		if (spawner.getSpawnedType() == EntityType.WITCH){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Witch") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 32;
 		}
-		/*
+		/* Zombie Villager doesn't exist
 		if (spawner.getSpawnedType() == EntityType.ZOMBIEVILLAGER){
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.ZombieVillager") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 33;
@@ -239,9 +247,6 @@ public class AdjusterPlayerListener implements Listener {
 		int initalvalue = i;
 		//i--;
 		int b = 0;
-		if(!spawner.hasMetadata("sub_type")) {
-			spawner.setMetadata("sub_type", new FixedMetadataValue(SpawnerAdjuster.getThisPlugin(), "none"));
-		}
 		while(i != initalvalue || b == 0) {
 			if(i >= 35) i = 0;
 
@@ -259,8 +264,6 @@ public class AdjusterPlayerListener implements Listener {
 			}
 			if(i == 3 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Skeleton") && SpawnerAdjuster.allowSkeleton) {
 				spawner.setSpawnedType(EntityType.SKELETON);
-				spawner.setMetadata("sub_type", new FixedMetadataValue(SpawnerAdjuster.getThisPlugin(), "none"));
-				spawner.getMetadata("sub_type").get(0).invalidate();
 				return;
 			}
 			if(i == 4 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Zombie") && SpawnerAdjuster.allowZombie) {
@@ -351,7 +354,7 @@ public class AdjusterPlayerListener implements Listener {
 				spawner.setSpawnedType(EntityType.BOAT);
 				return;
 			}
-			/*
+			/* Eggs disabed due to console errors. Check back later
 			if(i == 26 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Entity.Egg") && SpawnerAdjuster.allowEgg) {
 				spawner.setSpawnedType(EntityType.EGG);
 				return;
@@ -369,17 +372,17 @@ public class AdjusterPlayerListener implements Listener {
 				spawner.setSpawnedType(EntityType.WITHER);
 				return;
 			}
+			/* Wither Skeleton doesn't exist
 			if(i == 30 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Nether.WitherSkeleton") && SpawnerAdjuster.allowWitherSkeleton) {
-				spawner.setSpawnedType(EntityType.SKELETON);
-				spawner.setMetadata("sub_type", new FixedMetadataValue(SpawnerAdjuster.getThisPlugin(), "wither"));
-				spawner.getMetadata("sub_type").get(0).invalidate();
+				spawner.setSpawnedType(EntityType.WITHERSKELETON);
 				return;
 			}
+			*/
 			if(i == 31 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.Witch") && SpawnerAdjuster.allowWitch) {
 				spawner.setSpawnedType(EntityType.WITCH);
 				return;
 			}
-			/*
+			/* Zombie Villager Doesn't Exist
 			if(i == 32 && SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Hostile.ZombieVillager") && SpawnerAdjuster.allowZombieVillager) {
 				spawner.setSpawnedType(EntityType.ZOMBIEVILLAGER);
 				return;
