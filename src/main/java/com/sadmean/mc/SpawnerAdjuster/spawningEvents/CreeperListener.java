@@ -29,7 +29,7 @@ public class CreeperListener implements Listener{
 				int index = 0;
 				while(index < blocks.size()) {
 					if(blocks.get(index).getType() == Material.MOB_SPAWNER) {
-						if(blocks.get(index).hasMetadata("CreeperMod")) {
+						if(blocks.get(index).hasMetadata("sub_type")) { //only 1 creeper subtype so no need to figure out what the sub_type is
 							creeper.setPowered(true); //TADA!!!!
 						}
 					}

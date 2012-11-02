@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.metadata.FixedMetadataValue;
+import com.sadmean.mc.SpawnerAdjuster.Config.MetaData;
 
 public class AdjusterPlayerListener implements Listener {
 	public static SpawnerAdjuster plugin; public AdjusterPlayerListener(SpawnerAdjuster instance) { 
@@ -55,11 +55,11 @@ public class AdjusterPlayerListener implements Listener {
 					
 					//if creeper, charge and uncharge
 					if(spawner.getSpawnedType() == EntityType.CREEPER && SpawnerAdjuster.advanced_debugMode) {
-						if(spawner.hasMetadata("CreeperMod")) {
+						if(spawner.hasMetadata("sub_type")) {
 							event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Charged Creeper spawning disabled");
-							spawner.removeMetadata("CreeperMod", SpawnerAdjuster.getThisPlugin());
+							spawner.removeMetadata("sub_type", SpawnerAdjuster.getThisPlugin());
 						} else {
-							spawner.setMetadata("CreeperMod", new FixedMetadataValue(SpawnerAdjuster.getThisPlugin(), true));
+							spawner.setMetadata("sub_type", MetaData.CHARGED);
 							event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Charged Creeper spawning enabled");
 						}
 					}
@@ -77,9 +77,9 @@ public class AdjusterPlayerListener implements Listener {
 					if(spawner.getSpawnedType() == EntityType.SKELETON) {
 						if(spawner.hasMetadata("sub_type")) {
 							if(spawner.getMetadata("subType").get(0).asString().equalsIgnoreCase("none")) {
-								spawner.setMetadata("sub_type", new FixedMetadataValue(SpawnerAdjuster.getThisPlugin(), "wither"));
+								spawner.setMetadata("sub_type", MetaData.WITHER);
 							} else {
-								spawner.setMetadata("sub_type", new FixedMetadataValue(SpawnerAdjuster.getThisPlugin(), "none"));
+								spawner.setMetadata("sub_type", MetaData.NONE);
 							}
 						}
 						event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Skeleton Subtype set to" + ChatColor.RED + " " + spawner.getMetadata("sub_type").get(0).asString());
