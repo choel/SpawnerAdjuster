@@ -128,7 +128,7 @@ public class AdjusterBlockListener implements Listener {
 			if(SpawnerAdjuster.permCheck(event.getPlayer(), "SpawnerAdjuster.DropSpawners") && SpawnerAdjuster.allowDroppedSpawners) {
 				if(!event.isCancelled()) {
 					short asdf = 1;
-					ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1, asdf, event.getBlock().getData());
+					ItemStack spawnerstack = new ItemStack(event.getBlock().getType(), 1, asdf);
 					if(SpawnerAdjuster.advanced_needSilkTouchForSpawnerDrops) {
 						Map<Enchantment, Integer> map = event.getPlayer().getItemInHand().getEnchantments();
 						if(map.containsKey(Enchantment.SILK_TOUCH)) {

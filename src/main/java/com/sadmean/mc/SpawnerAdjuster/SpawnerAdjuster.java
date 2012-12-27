@@ -319,8 +319,9 @@ public class SpawnerAdjuster extends JavaPlugin {
 			}
 			return true;
 		} else {
+			if(!spawner.hasMetadata("spawnedEnts")) spawner.setMetadata("spawnedEnts", new FixedMetadataValue(getThisPlugin(), 1));
 			creature_Store.add(ent);
-			int spawnedEnts = spawner.getMetadata("TotalSpawnedEnts").get(0).asInt();
+			int spawnedEnts = spawner.getMetadata("spawnedEnts").get(0).asInt();
 			if(spawnedEnts >= entsPerSpawner || creature_Store.size() > TotalSpawnedEnts) {
 				return false;
 			} else {

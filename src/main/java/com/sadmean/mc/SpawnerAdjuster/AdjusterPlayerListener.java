@@ -45,7 +45,7 @@ public class AdjusterPlayerListener implements Listener {
 					//message is not hidden
 					event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Spawner was: "+ ChatColor.GREEN + name + ChatColor.GRAY + ". Now set to: " + ChatColor.GREEN + newName);
 					spawner.setDelay(200); //reset delay
-					spawner.removeMetadata("sub_type", SpawnerAdjuster.getThisPlugin()); //remove meta data
+					if(spawner.hasMetadata("sub_type")) spawner.removeMetadata("sub_type", SpawnerAdjuster.getThisPlugin()); //remove meta data
 				}
 
 			} else {
@@ -74,13 +74,15 @@ public class AdjusterPlayerListener implements Listener {
 						//nothing yet
 					}
 					
-					if(spawner.getSpawnedType() == EntityType.SKELETON) {
+					if(spawner.getSpawnedType() == EntityType.SKELETON && SpawnerAdjuster.advanced_debugMode) {
 						if(spawner.hasMetadata("sub_type")) {
-							if(spawner.getMetadata("subType").get(0).asString().equalsIgnoreCase("none")) {
+							if(spawner.getMetadata("sub_type").get(0).asString().equalsIgnoreCase("none")) {
 								spawner.setMetadata("sub_type", MetaData.WITHER);
 							} else {
 								spawner.setMetadata("sub_type", MetaData.NONE);
 							}
+						} else {
+							spawner.setMetadata("sub_type", MetaData.NONE);
 						}
 						event.getPlayer().sendMessage(SpawnerAdjuster.chatPrefix + "Skeleton Subtype set to" + ChatColor.RED + " " + spawner.getMetadata("sub_type").get(0).asString());
 					}
