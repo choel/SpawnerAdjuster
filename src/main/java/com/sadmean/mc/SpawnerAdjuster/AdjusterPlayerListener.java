@@ -239,7 +239,6 @@ public class AdjusterPlayerListener implements Listener {
 			if(!SpawnerAdjuster.permCheck(player, "SpawnerAdjuster.SetMobs.Neutral.Bat") && SpawnerAdjuster.mustHaveValidPermissionsToAlterSpawner) return;
 			i = 34;
 		}
-		
 		//if i is still -1, then we have an unknown mob type. We should not play with that spawner
 		if(i == -1) {
 			SpawnerAdjuster.log_It("warning", "Unkown mob type error from spawner at " + spawner.getLocation());
